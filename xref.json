@@ -1,4 +1,6 @@
 {"xref": {
+  "whenMade": 1298130794766,
+  "whatMadeThis": "JBehave",
   "meta": [
     "category=advanced",
     "category=basic",
@@ -14,7 +16,7 @@
       "path": "advanced_search.story",
       "html": "advanced_search.html",
       "meta": "category=advanced\u000acolor=red\u000a",
-      "scenarios": "Scenario:Advanced Search for a hat\u000aGiven I am searching on Etsy.com\u000aWhen I specify the Knitting sub category\u000aAnd I search for hat\u000aThen there are search results\u000a\u000a\u000a",
+      "scenarios": "Scenario:Advanced Search for a hat\u000aGiven I am searching on Etsy.com\u000aWhen I specify the Knitting sub category\u000aAnd I search for hat\u000aThen there are search results\u000a\u000a\u000aScenario:Advanced Search for a ring\u000aGiven I am searching on Etsy.com\u000aWhen I specify the Jewelry sub category\u000aAnd I search for ring\u000aThen there are search results\u000a\u000a\u000a",
       "passed": true
     },
     {
@@ -39,145 +41,179 @@
     }
   ],
   "stepMatches": [
-    [
-      "I\\s+specify\\s+the\\s+(.*)\\s+sub\\s+category",
-      [
+    {
+      "annotatedPattern": "I search for $thing",
+      "resolvedPattern": "I\\s+search\\s+for\\s+(.*)",
+      "usages": [
         {
-          "storyPath": "advanced_search.story",
-          "scenarioTitle": "Advanced Search for a hat",
-          "step": "When I specify the Knitting sub category"
-        }
-      ]
-    ],
-    [
-      "that\\s+the\\s+cart\\s+is\\s+empty",
-      [
+          "story": "advanced_search.story",
+          "scenario": "Advanced Search for a ring",
+          "step": "And I search for ring"
+        },
         {
-          "storyPath": "etsy_cart.story",
-          "scenarioTitle": "Item can be added to cart",
-          "step": "Given that the cart is empty"
-        }
-      ]
-    ],
-    [
-      "I\\s+search\\s+for\\s+an\\s+item",
-      [
-        {
-          "storyPath": "etsy_cart.story",
-          "scenarioTitle": "Item can be added to cart",
-          "step": "When I search for an item"
-        }
-      ]
-    ],
-    [
-      "the\\s+item\\s+is\\s+removed",
-      [
-        {
-          "storyPath": "etsy_cart.story",
-          "scenarioTitle": "Item can be removed from cart",
-          "step": "When the item is removed"
-        }
-      ]
-    ],
-    [
-      "I\\s+am\\s+on\\s+etsy\\.com",
-      [
-        {
-          "storyPath": "etsy_browse.story",
-          "scenarioTitle": "Browsing around the site for items",
-          "step": "Given I am on etsy.com"
-        }
-      ]
-    ],
-    [
-      "results\\s+will\\s+be\\s+displayed\\s+in\\s+the\\s+gallery",
-      [
-        {
-          "storyPath": "etsy_browse.story",
-          "scenarioTitle": "Browsing around the site for items",
-          "step": "Then results will be displayed in the gallery"
-        }
-      ]
-    ],
-    [
-      "I\\s+search\\s+for\\s+(.*)",
-      [
-        {
-          "storyPath": "advanced_search.story",
-          "scenarioTitle": "Advanced Search for a hat",
+          "story": "advanced_search.story",
+          "scenario": "Advanced Search for a hat",
           "step": "And I search for hat"
         }
       ]
-    ],
-    [
-      "there\\s+are\\s+search\\s+results",
-      [
+    },
+    {
+      "annotatedPattern": "I want to browse through a treasury gallery",
+      "resolvedPattern": "I\\s+want\\s+to\\s+browse\\s+through\\s+a\\s+treasury\\s+gallery",
+      "usages": [
         {
-          "storyPath": "advanced_search.story",
-          "scenarioTitle": "Advanced Search for a hat",
-          "step": "Then there are search results"
-        }
-      ]
-    ],
-    [
-      "the\\s+cart\\s+contains\\s+that\\s+item",
-      [
-        {
-          "storyPath": "etsy_cart.story",
-          "scenarioTitle": "Item can be added to cart",
-          "step": "Then the cart contains that item"
-        }
-      ]
-    ],
-    [
-      "I\\s+am\\s+searching\\s+on\\s+Etsy\\.com",
-      [
-        {
-          "storyPath": "advanced_search.story",
-          "scenarioTitle": "Advanced Search for a hat",
-          "step": "Given I am searching on Etsy.com"
-        }
-      ]
-    ],
-    [
-      "I\\s+want\\s+to\\s+browse\\s+through\\s+a\\s+treasury\\s+gallery",
-      [
-        {
-          "storyPath": "etsy_browse.story",
-          "scenarioTitle": "Browsing around the site for items",
+          "story": "etsy_browse.story",
+          "scenario": "Browsing around the site for items",
           "step": "When I want to browse through a treasury gallery"
         }
       ]
-    ],
-    [
-      "an\\s+item\\s+is\\s+added\\s+to\\s+the\\s+cart",
-      [
+    },
+    {
+      "annotatedPattern": "results will be displayed in the gallery",
+      "resolvedPattern": "results\\s+will\\s+be\\s+displayed\\s+in\\s+the\\s+gallery",
+      "usages": [
         {
-          "storyPath": "etsy_cart.story",
-          "scenarioTitle": "Item can be added to cart",
-          "step": "And an item is added to the cart"
+          "story": "etsy_browse.story",
+          "scenario": "Browsing around the site for items",
+          "step": "Then results will be displayed in the gallery"
         }
       ]
-    ],
-    [
-      "the\\s+cart\\s+will\\s+be\\s+empty",
-      [
+    },
+    {
+      "annotatedPattern": "that the cart is empty",
+      "resolvedPattern": "that\\s+the\\s+cart\\s+is\\s+empty",
+      "usages": [
         {
-          "storyPath": "etsy_cart.story",
-          "scenarioTitle": "Item can be removed from cart",
-          "step": "Then the cart will be empty"
+          "story": "etsy_cart.story",
+          "scenario": "Item can be added to cart",
+          "step": "Given that the cart is empty"
         }
       ]
-    ],
-    [
-      "the\\s+cart\\s+contains\\s+one\\s+item",
-      [
+    },
+    {
+      "annotatedPattern": "I am searching on Etsy.com",
+      "resolvedPattern": "I\\s+am\\s+searching\\s+on\\s+Etsy\\.com",
+      "usages": [
         {
-          "storyPath": "etsy_cart.story",
-          "scenarioTitle": "Item can be removed from cart",
+          "story": "advanced_search.story",
+          "scenario": "Advanced Search for a hat",
+          "step": "Given I am searching on Etsy.com"
+        },
+        {
+          "story": "advanced_search.story",
+          "scenario": "Advanced Search for a ring",
+          "step": "Given I am searching on Etsy.com"
+        }
+      ]
+    },
+    {
+      "annotatedPattern": "the cart contains one item",
+      "resolvedPattern": "the\\s+cart\\s+contains\\s+one\\s+item",
+      "usages": [
+        {
+          "story": "etsy_cart.story",
+          "scenario": "Item can be removed from cart",
           "step": "Given the cart contains one item"
         }
       ]
-    ]
+    },
+    {
+      "annotatedPattern": "an item is added to the cart",
+      "resolvedPattern": "an\\s+item\\s+is\\s+added\\s+to\\s+the\\s+cart",
+      "usages": [
+        {
+          "story": "etsy_cart.story",
+          "scenario": "Item can be added to cart",
+          "step": "And an item is added to the cart"
+        }
+      ]
+    },
+    {
+      "annotatedPattern": "the cart contains that item",
+      "resolvedPattern": "the\\s+cart\\s+contains\\s+that\\s+item",
+      "usages": [
+        {
+          "story": "etsy_cart.story",
+          "scenario": "Item can be added to cart",
+          "step": "Then the cart contains that item"
+        }
+      ]
+    },
+    {
+      "annotatedPattern": "the cart will be empty",
+      "resolvedPattern": "the\\s+cart\\s+will\\s+be\\s+empty",
+      "usages": [
+        {
+          "story": "etsy_cart.story",
+          "scenario": "Item can be removed from cart",
+          "step": "Then the cart will be empty"
+        }
+      ]
+    },
+    {
+      "annotatedPattern": "I am on etsy.com",
+      "resolvedPattern": "I\\s+am\\s+on\\s+etsy\\.com",
+      "usages": [
+        {
+          "story": "etsy_browse.story",
+          "scenario": "Browsing around the site for items",
+          "step": "Given I am on etsy.com"
+        }
+      ]
+    },
+    {
+      "annotatedPattern": "there are search results",
+      "resolvedPattern": "there\\s+are\\s+search\\s+results",
+      "usages": [
+        {
+          "story": "advanced_search.story",
+          "scenario": "Advanced Search for a hat",
+          "step": "Then there are search results"
+        },
+        {
+          "story": "advanced_search.story",
+          "scenario": "Advanced Search for a ring",
+          "step": "Then there are search results"
+        }
+      ]
+    },
+    {
+      "annotatedPattern": "I search for an item",
+      "resolvedPattern": "I\\s+search\\s+for\\s+an\\s+item",
+      "usages": [
+        {
+          "story": "etsy_cart.story",
+          "scenario": "Item can be added to cart",
+          "step": "When I search for an item"
+        }
+      ]
+    },
+    {
+      "annotatedPattern": "the item is removed",
+      "resolvedPattern": "the\\s+item\\s+is\\s+removed",
+      "usages": [
+        {
+          "story": "etsy_cart.story",
+          "scenario": "Item can be removed from cart",
+          "step": "When the item is removed"
+        }
+      ]
+    },
+    {
+      "annotatedPattern": "I specify the $subCat sub category",
+      "resolvedPattern": "I\\s+specify\\s+the\\s+(.*)\\s+sub\\s+category",
+      "usages": [
+        {
+          "story": "advanced_search.story",
+          "scenario": "Advanced Search for a hat",
+          "step": "When I specify the Knitting sub category"
+        },
+        {
+          "story": "advanced_search.story",
+          "scenario": "Advanced Search for a ring",
+          "step": "When I specify the Jewelry sub category"
+        }
+      ]
+    }
   ]
 }}
