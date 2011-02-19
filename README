@@ -1,0 +1,6 @@
+open navigator.html to see this working 
+
+   - not in Chrome as that thinks that data served from the adjacent file:// is a same-origin-policy violation
+
+open xref.json to see the data in question
+
