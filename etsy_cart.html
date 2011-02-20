@@ -25,86 +25,24 @@
 <div class="step ignorable">!-- We don't care for which item is added to the cart</div>
 <div class="step successful">When I search for an item</div>
 <div class="step successful">And an item is added to the cart</div>
-<div class="step failed">Then the cart contains that item <span class="keyword failed">(FAILED)</span><br/><span class="message failed">java.lang.AssertionError: cart should have contained 51989444
+<div class="step failed">Then the cart contains that item <span class="keyword failed">(FAILED)</span><br/><span class="message failed">java.lang.AssertionError: cart should have contained 59469771
 Expected: is &lt;true&gt;
      got: &lt;false&gt;
-</span><br/><a color="black" href="../screenshots/failed-scenario-2de82231-29a9-4a1c-a322-dac1ef697270.png"><img src="images/failing_screenshot.png" alt="failing screenshot"/></a></div>
-<pre class="failure">org.jbehave.core.failures.UUIDExceptionWrapper: java.lang.AssertionError: cart should have contained 51989444
-Expected: is &lt;true&gt;
-     got: &lt;false&gt;
-
-	at org.jbehave.core.steps.StepCreator$5.perform(StepCreator.java:155)
-	at org.jbehave.core.embedder.StoryRunner$FineSoFar.run(StoryRunner.java:261)
-	at org.jbehave.core.embedder.StoryRunner.runStepsWhileKeepingState(StoryRunner.java:250)
-	at org.jbehave.core.embedder.StoryRunner.runScenarioSteps(StoryRunner.java:241)
-	at org.jbehave.core.embedder.StoryRunner.run(StoryRunner.java:146)
-	at org.jbehave.core.embedder.StoryRunner.run(StoryRunner.java:73)
-	at org.jbehave.core.embedder.Embedder.runStoriesAsPaths(Embedder.java:202)
-	at org.jbehave.core.junit.JUnitStories.run(JUnitStories.java:17)
-	at org.jbehave.core.embedder.Embedder.runAsEmbeddables(Embedder.java:102)
-	at org.jbehave.mojo.RunStoriesAsEmbeddables.execute(RunStoriesAsEmbeddables.java:17)
-	at org.apache.maven.plugin.DefaultPluginManager.executeMojo(DefaultPluginManager.java:490)
-	at org.apache.maven.lifecycle.DefaultLifecycleExecutor.executeGoals(DefaultLifecycleExecutor.java:694)
-	at org.apache.maven.lifecycle.DefaultLifecycleExecutor.executeGoalWithLifecycle(DefaultLifecycleExecutor.java:556)
-	at org.apache.maven.lifecycle.DefaultLifecycleExecutor.executeGoal(DefaultLifecycleExecutor.java:535)
-	at org.apache.maven.lifecycle.DefaultLifecycleExecutor.executeGoalAndHandleFailures(DefaultLifecycleExecutor.java:387)
-	at org.apache.maven.lifecycle.DefaultLifecycleExecutor.executeTaskSegments(DefaultLifecycleExecutor.java:348)
-	at org.apache.maven.lifecycle.DefaultLifecycleExecutor.execute(DefaultLifecycleExecutor.java:180)
-	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:328)
-	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:138)
-	at org.apache.maven.cli.MavenCli.main(MavenCli.java:362)
-	at org.apache.maven.cli.compat.CompatibleMain.main(CompatibleMain.java:60)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
-	at java.lang.reflect.Method.invoke(Method.java:597)
-	at org.codehaus.classworlds.Launcher.launchEnhanced(Launcher.java:315)
-	at org.codehaus.classworlds.Launcher.launch(Launcher.java:255)
-	at org.codehaus.classworlds.Launcher.mainWithExitCode(Launcher.java:430)
-	at org.codehaus.classworlds.Launcher.main(Launcher.java:375)
-Caused by: java.lang.AssertionError: cart should have contained 51989444
+</span><br/><a color="black" target="jb_scn_shot" href="failed-scenario-cea1bfce-cea3-488e-ad7a-d1cf885a463b.png"><img src="images/failing_screenshot.png" alt="failing screenshot"/></a></div>
+<pre class="failure">java.lang.AssertionError: cart should have contained 59469771
 Expected: is &lt;true&gt;
      got: &lt;false&gt;
 
 	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:21)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
-	at java.lang.reflect.Method.invoke(Method.java:597)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:88)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
-	at groovy.lang.MetaClassImpl.invokeStaticMethod(MetaClassImpl.java:1302)
-	at org.codehaus.groovy.runtime.InvokerHelper.invokeStaticMethod(InvokerHelper.java:819)
-	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeStaticMethodN(ScriptBytecodeAdapter.java:205)
+	(groovy-static-method-invoke)
 	at com.github.tanob.groobe.AssertionSupport.assertWithFailureMessage(AssertionSupport.groovy:32)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
-	at java.lang.reflect.Method.invoke(Method.java:597)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:88)
-	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:233)
-	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:362)
-	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.invokeMethodOnCurrentN(ScriptBytecodeAdapter.java:77)
+	(groovy-instance-method-invoke)
 	at com.github.tanob.groobe.AssertionSupport$_assertTransformedDelegateAndOneParam_closure3.doCall(AssertionSupport.groovy:20)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
-	at java.lang.reflect.Method.invoke(Method.java:597)
-	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:88)
-	at org.codehaus.groovy.runtime.metaclass.ClosureMetaMethod.invoke(ClosureMetaMethod.java:80)
-	at org.codehaus.groovy.runtime.callsite.PojoMetaMethodSite$PojoMetaMethodSiteNoUnwrapNoCoerce.invoke(PojoMetaMethodSite.java:270)
-	at org.codehaus.groovy.runtime.callsite.PojoMetaMethodSite.call(PojoMetaMethodSite.java:52)
-	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:40)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:116)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:128)
+	(groovy-closure-invoke)
 	at EtsyDotComSteps.cartHasThatItem(EtsyDotComSteps.groovy:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
-	at java.lang.reflect.Method.invoke(Method.java:597)
-	at org.jbehave.core.steps.StepCreator$5.perform(StepCreator.java:145)
-	... 28 more
-</pre>
+	(reflection-invoke)
+	at org.jbehave.core.steps.StepCreator$ParameterizedStep.perform(StepCreator.java:430)
+	at org.jbehave.core.embedder.StoryRunner$FineSoFar.run(StoryRunner.java:261)</pre>
 </div>
 <div class="scenario">
 <h2>Scenario: Item can be removed from cart</h2>

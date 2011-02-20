@@ -1,6 +1,6 @@
 {"xref": {
-  "whenMade": 1298130794766,
-  "whatMadeThis": "JBehave",
+  "whenMade": 1298222699594,
+  "createdBy": "JBehave",
   "meta": [
     "category=advanced",
     "category=basic",
@@ -205,13 +205,13 @@
       "usages": [
         {
           "story": "advanced_search.story",
-          "scenario": "Advanced Search for a hat",
-          "step": "When I specify the Knitting sub category"
+          "scenario": "Advanced Search for a ring",
+          "step": "When I specify the Jewelry sub category"
         },
         {
           "story": "advanced_search.story",
-          "scenario": "Advanced Search for a ring",
-          "step": "When I specify the Jewelry sub category"
+          "scenario": "Advanced Search for a hat",
+          "step": "When I specify the Knitting sub category"
         }
       ]
     }
