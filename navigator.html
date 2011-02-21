@@ -192,7 +192,7 @@
                   <th class="description"><input name="search.description" class="filterInput"/></th>
                   <th class="meta">
                   	<select name="search.meta" class="filterInput">
-                      <option value="=" selected>**All**</option>
+                      <option value="=" selected="selected">**All**</option>
                       <option ng:repeat="permutation in data.xref.meta">{{permutation}}</option>
                     </select></th>
                   <th class="narrative"><input name="search.narrative" class="filterInput"/></th>
@@ -216,23 +216,36 @@
 							</tbody>
             </table>
 
-            <!-- TODO: introduce a more significant structure for the steps.  Currently they can be read directly from the story results dialog.
+            <hr/>
+
             <h2>Steps</h2>
-            <table border="1">
-              <tr>
-                <th>Number</th>
-                <th>Story Path</th>
-                <th>Scenario Title</th>
-                <th>Step</th>
-              </tr>
-              <tr ng:repeat="match in data.xref.stepMatches">
-                <td>{{$index + 1}}</td>
-                <td>{{match.storyPath}}</td>
-                <td>{{match.scenarioTitle}}</td>
-                <td>{{match.step}}</td>
-               </tr>
+            <table cellspacing="0" cellpadding="0">
+	          <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Pattern</th>
+                </tr>
+                <tr>
+	              <th>
+	              	<select name="stepSearch.type" class="filterInput">
+	                  <option value="" selected="selected">**All**</option>
+	                  <option selected>GIVEN</option>
+	                  <option selected>WHEN</option>
+	                  <option selected>THEN</option>
+	                </select>
+	              </th>
+                  <th></th>
+                </tr>
+              </thead>
+
+
+              <tbody>
+                <tr ng:repeat="match in data.xref.stepMatches.$filter(stepSearch)">
+                  <td>{{match.type}}</td>
+                  <td>{{match.annotatedPattern}}</td>
+                 </tr>
+              </tbody>
             </table>
-            -->
 
         </div>
         <div id="footer">
