@@ -4,13 +4,14 @@
 }
 
 body {
-	font-size: 62.5%;
+	font-family: Arial, Tahoma, sans-serif;
+	font-size: 72%;
 	background: url(../images/stripe.png) repeat;
 }
 
 
 p, li {
-	font: 1.2em/1.8em Tahoma, sans-serif;
+	font: 1em/1.2em;
 	color: #999991;
 	margin-bottom: 10px;
 }
@@ -19,17 +20,22 @@ a {
 	color: #3199ee;
 	text-decoration:none;
 } 
-a:hover {color:#fa0;}
-a img{border: 0;}
+a:hover {
+	color:#f90;
+}
+
+a img {
+	border:0;
+}
 
 h1 {
-	font: 2.0em Tahoma, sans-serif;
+	font: 2.0em;
 	color: white;
 	height: 0px;
 }
 
 h2 {
-	font: 1.8em Tahoma, sans-serif;
+	font: 1.8em;
 	color: white;
 	margin-bottom: 10px;
 }
@@ -42,15 +48,130 @@ img {
 	border: none;
 }
 
-th {
-	font: 1.8em Tahoma, sans-serif;
-	color: white;
-	margin-bottom: 10px;
+table {
+	width:100%;
 }
 
-td {
-	font: 1.2em/1.8em Tahoma, sans-serif;
-	color: #999991;
+thead th {
+	background-color:#444;
+	border-top:3px solid #666;
+	color: #3199ee;
+	font: 1.5em Arial Rounded MT Bold,Arial,Tahoma,sans-serif;
+	font-weight:bold;
+	padding:15px 10px;
+	text-align:left;
+	text-transform:uppercase;
+}
+
+thead th a {
+	background-image:none;
+	background-position: center right;
+	background-repeat: no-repeat;
+	cursor:pointer;
+	margin-right:20px;
+	padding:10px 40px 10px 0;
+}
+
+a#status-asc,
+a#path-asc,
+a#description-asc,
+a#meta-asc,
+a#narrative-asc {
+	display:none;
+	background-image:url('../images/orange-arrow-down.png');
+}
+
+a#status-des,
+a#path-des,
+a#description-des,
+a#meta-des,
+a#narrative-des {
+	background-image:url('../images/orange-arrow-up.png');
+}
+
+thead th.section {
+	background:#ffc114;
+	border:0;
+	color:#444;
+	font: 2.5em Arial Rounded MT Bold, Arial, Tahoma, sans-serif;
+	font-weight:bold;
+	padding:10px;
+	text-transform:capitalize;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+thead th.status 			{ width:10% }
+thead th.function			{ width:15% }
+thead th.feature 			{ width:15% }
+thead th.description	{ width:30% }
+thead th.narrative		{ width:40% }
+
+tbody td {
+	border-top:1px solid #fc0;
+	color: #fff;
+	font: 1.1em  Arial, Tahoma, sans-serif;
+	padding:15px;
+	vertical-align:top;
+}
+
+tbody td.status {
+	padding-left:35px;
+}
+
+tbody td a {
+	clear:both;
+	display:block;
+}
+tbody td a:hover {
+	text-decoration:underline;
+}
+
+tbody td.function,
+tbody td.feature,
+tbody td.description {
+  text-transform:capitalize;
+}
+
+tbody tr:hover {
+	background:#069;
+	cursor:pointer;
+}
+
+tbody tr:hover td a {
+	color:#fff;
+}
+
+tbody tr:hover td a:hover {
+	color:#f90;
+}
+
+tbody tr.draft-true						{ background-color: #555; }
+tbody tr.draft-true td				{ color:#bbb; }
+tbody tr.draft-true:hover			{	background:#899; }
+tbody tr.draft-true:hover td	{ color:#efefef; }
+
+.filterInput {
+	background-color: #fff;
+	border:1px solid #369;	
+	color: #369;
+	font-family: Arial Rounded MT Bold, Arial, Tahoma, sans-serif;
+	padding: 2px;
+}
+
+select.filterInput {
+	text-transform:capitalize;
+	width:165px;
+}
+
+th.status select.filterInput {
+	width:90px;
+}
+
+input.filterInput {
+	width:235px;
 }
 
 #page-wrap {
@@ -58,22 +179,53 @@ td {
 	min-width: 780px;
 	max-width: 1260px;
 	margin: 10px auto;
-	}
-	#page-wrap #inside {
-		background: black;
-		margin: 10px 10px 0px 10px;
-		padding-top: 10px;
-		padding-bottom: 10px;
-	}
+}
+
+#page-wrap #inside {
+	background: black;
+	margin: 10px 10px 0px 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
 	
 #main-content {
 	background: #303030;
 	margin: 10px 0px 10px 0px;
+	padding:5px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 	
 #header {
-	background: #FFAA00;
+	background:url('../images/bg-jbehave-header.png') top left repeat-x #FFAA00;
 	text-align: left;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	height:130px;
+	overflow:hidden;
+}
+
+#header h1 {
+	color:#069;
+	display:block;
+	float:left;
+	font: 4em Arial Rounded MT Bold,Arial,Tahoma,sans-serif;
+	left:230px;
+	position:relative;
+	top:40px;
+}
+
+#header h2 {
+	background:url('../images/jbehave-logo.png') bottom right no-repeat;
+	color:#069;
+	float:right;
+	font-size:1em;
+	position:relative;
+	text-align:right;
+	top:15px;
+	right:10px;
+	width:234px;
+	height:100px;
 }
 	
 #left-sidebar {
@@ -97,9 +249,25 @@ td {
 
 #footer {
 	background: #FFAA00;
-	text-align: center;
+	color: white;
+	margin-top: 10px;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	margin-top: 10px;
-	color: white;
+	text-align: center;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+
+/*
+ * Pop-up layers
+ */
+
+pre {
+	font-family: Arial, Tahoma, sans-serif;
+	font-size:1em;
+}
+
+pre br {
+	margin-bottom:20px;
 }
