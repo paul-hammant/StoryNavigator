@@ -164,53 +164,54 @@
                 </tr>
 								-->
                 <tr>
-                    <th class="status">
-                      <a href id="status-asc" ng:click="predicate = 'passed'">Status</a>
-											<a href id="status-des" ng:click="predicate = '-passed'">Status</a>
-	                  </th>
-                    <th class="path">
-                    	<a href id="path-asc" ng:click="predicate = 'path'">Path</a>
-											<a href id="path-des" ng:click="predicate = '-path'">Path</a>
-                    </th>
-                    <th class="description">
-                      <a href id="description-asc" ng:click="predicate = 'description'">Description</a>
-											<a href id="description-des" ng:click="predicate = '-description'">Description</a>
-                    </th>
-                    <th class="meta">
-                    	<a href id="meta-asc" ng:click="predicate = 'meta'">Meta</a>
-											<a href id="meta-des" ng:click="predicate = '-meta'">Meta</a>
-                    </th>
-                    <th class="narrative">
-											<a href id="narrative-asc" ng:click="predicate = 'narrative'">Narrative</a>
-											<a href id="narrative-des" ng:click="predicate = '-narrative'">Narrative</a>
-                    </th>
-                    <th>View</th>
+                  <th class="status">
+                    <a href id="status-asc" ng:click="predicate = 'passed'">Status</a>
+										<a href id="status-des" ng:click="predicate = '-passed'">Status</a>
+                  </th>
+                  <th class="path">
+                  	<a href id="path-asc" ng:click="predicate = 'path'">Path</a>
+										<a href id="path-des" ng:click="predicate = '-path'">Path</a>
+                  </th>
+                  <th class="description">
+                    <a href id="description-asc" ng:click="predicate = 'description'">Description</a>
+										<a href id="description-des" ng:click="predicate = '-description'">Description</a>
+                  </th>
+                  <th class="meta">
+                  	<a href id="meta-asc" ng:click="predicate = 'meta'">Meta</a>
+										<a href id="meta-des" ng:click="predicate = '-meta'">Meta</a>
+                  </th>
+                  <th class="narrative">
+										<a href id="narrative-asc" ng:click="predicate = 'narrative'">Narrative</a>
+										<a href id="narrative-des" ng:click="predicate = '-narrative'">Narrative</a>
+                  </th>
+                  <th class="view">View</th>
                 </tr>
                 <tr>
-                    <th></th>
-                    <th><input name="search.path"/></th>
-                    <th><input name="search.description"/></th>
-                    <th><select name="search.meta">
-                        <option value="=" selected>**All**</option>
-                        <option ng:repeat="permutation in data.xref.meta">{{permutation}}</option>
+                  <th class="status"></th>
+                  <th class="path"><input name="search.path" class="filterInput"/></th>
+                  <th class="description"><input name="search.description" class="filterInput"/></th>
+                  <th class="meta">
+                  	<select name="search.meta" class="filterInput">
+                      <option value="=" selected>**All**</option>
+                      <option ng:repeat="permutation in data.xref.meta">{{permutation}}</option>
                     </select></th>
-                    <th><input name="search.narrative"/></th>
-                    <th></th>
+                  <th class="narrative"><input name="search.narrative" class="filterInput"/></th>
+                  <th class="view"></th>
                 </tr>
 							</thead>
 							<tbody>
                 <tr ng:repeat="story in data.xref.stories.$filter(search).$orderBy(predicate)"
 										ng:click="showResults(story)" title="Click to view the story details">
-                    <td><img src="images/passed-{{story.passed}}.png" alt="Story Passed == {{story.passed}}"/></td>
-                    <td>{{story.path}}</td>
-                    <td>{{story.description}}</td>
-                    <td>{{story.meta}}</td>
-                    <td>{{story.narrative | newlines | html}}</td>
-                    <td>
-                        <a href ng:click="showResults(story)">Results</a><br/>
-                        <a href ng:click="showScenarios(story)">Scenarios</a>
-                        <!--button ng:click="openEditTab(story)">Edit</button-->
-                    </td>
+                  <td class="status"><img src="images/passed-{{story.passed}}.png" alt="Story Passed == {{story.passed}}"/></td>
+                  <td class="path">{{story.path}}</td>
+                  <td class="description">{{story.description}}</td>
+                  <td class="meta">{{story.meta}}</td>
+                  <td class="narrative">{{story.narrative | newlines | html}}</td>
+                  <td class="view">
+                      <a href ng:click="showResults(story)">Results</a><br/>
+                      <a href ng:click="showScenarios(story)">Scenarios</a>
+                      <!--button ng:click="openEditTab(story)">Edit</button-->
+                  </td>
                 </tr>
 							</tbody>
             </table>
