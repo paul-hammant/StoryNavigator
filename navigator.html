@@ -224,16 +224,18 @@
                 <tr>
                   <th>Type</th>
                   <th>Pattern</th>
+                  <th>Use Count</th>
                 </tr>
                 <tr>
 	              <th>
-	              	<select name="stepSearch.type" class="filterInput">
+	              	<select ng:init="stepSearch.type = ''" name="stepSearch.type" class="filterInput">
 	                  <option value="" selected="selected">**All**</option>
 	                  <option selected>GIVEN</option>
 	                  <option selected>WHEN</option>
 	                  <option selected>THEN</option>
 	                </select>
 	              </th>
+                  <th></th>
                   <th></th>
                 </tr>
               </thead>
@@ -243,6 +245,7 @@
                 <tr ng:repeat="match in data.xref.stepMatches.$filter(stepSearch)">
                   <td>{{match.type}}</td>
                   <td>{{match.annotatedPattern}}</td>
+                  <td>{{match.usages.$size()}}</td>
                  </tr>
               </tbody>
             </table>
