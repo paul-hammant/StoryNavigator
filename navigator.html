@@ -8,184 +8,116 @@
     <script type="text/javascript" src="js/jquery-ui.min-1.7.1.js"></script>
     <script type="text/javascript" src="js/jquery-framedialog-1.1.2.js"></script>
     <link rel="stylesheet" type="text/css" href="style/jbehave-navigator.css"/>
-    <link rel="stylesheet" type="text/css" href="style/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="style/jquery-ui.css"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>JBehave Story Navigator</title>
 </head>
-
 <body ng:controller="MyController">
 
 <script type="text/javascript">
-    MyController.$inject = ["$resource"];
-    function MyController($resource) {
-        this.Story = $resource("xref.json");
-        this.data = this.Story.get({});
+	function MyController($resource) {
+    this.Story = $resource("xref.json");
+    this.data = this.Story.get({});
+  }
+  MyController.$inject = ["$resource"];
+  MyController.prototype = {
+	  showResults: function(story) {
+	    jQuery.FrameDialog.create({
+		    width: 1000,
+		    height: 600,
+		    closeText: 'foo',
+		    url: story.html,
+		    title: 'Results For ' + story.path,
+		    closeOnEscape: true,
+		    buttons: [
+	        {
+	        }
+		    ]
+	  	})
+		},
+		showScenarios: function(story) {
+    var $dialog = $('<div></div>')
+			.html('<pre>' + story.scenarios.replace("\n", "<br/>") + '</pre>')
+			.dialog({
+	      width: 800,
+	      height: 400,
+	      autoOpen: false,
+	      title: 'Scenarios for ' + story.path
+      });
+    	$dialog.dialog('open');
+    	// prevent the default action, e.g., following a link
+		},
+    openEditTab: function(story) {
+	    alert("TODO");
     }
-    MyController.prototype = {
-        showResults: function(story) {
-
-            jQuery.FrameDialog.create({
-                width: 1000,
-                height: 600,
-                closeText: 'foo',
-                url: story.html,
-                title: 'Results For ' + story.path,
-                closeOnEscape: true,
-                buttons: [
-                    {
-                    }
-                ]
-            })
-        },
-        showScenarios: function(story) {
-
-            var $dialog = $('<div></div>')
-                    .html('<pre>' + story.scenarios.replace("\n", "<br>") + '</pre>')
-                    .dialog({
-                                width: 800,
-                                height: 400,
-                                autoOpen: false,
-                                title: 'Scenarios for ' + story.path
-                            });
-
-            $dialog.dialog('open');
-            // prevent the default action, e.g., following a link
-        },
-        openEditTab: function(story) {
-            alert("TODO");
-        }
-    };
-    angular.filter('newlines', function(text) {
-        return text.replace(/\n/g, '<br/>');
-    });
+  };
+	angular.filter('newlines', function(text) {
+	  return text.replace(/\n/g, '<br/>');
+	});
 		
-		$(document).ready(function() {
-        function resetHeaders() {
-					$('thead tr th a').css('color', '#3199ee');
-					$('thead tr th a').css('background-image', 'none');
-        }
-
-				//STATUS
-        $('#status-des').click(function() {
-					resetHeaders();
-					$('#status-asc').css('color', '#f90');
-					$('#status-asc').css('background-image', 'url(images/orange-arrow-down.png)');
-					$('#status-asc').show();
-					$(this).hide();
+  $(document).ready(function() {
+		//RESET and SORT-HEADER HANDLER
+		$('thead th a').click(function() {
+			//INIT
+			var parentId = $(this).parent().parent().parent().parent().parent().attr("id");
+			var thisId = this.id.substring(0,(this.id.length-4));
+			var thisIdObj = ((this.id).indexOf('-des') != -1) ? '#'+thisId+'-asc' : '#'+thisId+'-des';
+			//RESET
+			$('#'+parentId+' thead th a').each(function() { $(this).attr('class', 'reset'); });
+			$(this).hide();
+			//SORT-HANDLER
+			$(thisIdObj).attr('class', 'ascending');
+			$(thisIdObj).show();
         });
-				
-        $('#status-asc').click(function() {
-					resetHeaders();
-					$('#status-des').css('color', '#f90');
-					$('#status-des').css('background-image', 'url(images/orange-arrow-up.png)');
-					$('#status-des').show();
-					$(this).hide();
-        });
-
-        //PATH
-        $('#path-des').click(function() {
-					resetHeaders();
-					$('#path-asc').css('color', '#f90');
-					$('#path-asc').css('background-image', 'url(images/orange-arrow-down.png)');
-					$('#path-asc').show();
-					$(this).hide();
-        });
-        
-        $('#path-asc').click(function() {
-					resetHeaders();
-					$('#path-des').css('color', '#f90');
-					$('#path-des').css('background-image', 'url(images/orange-arrow-up.png)');
-					$('#path-des').show();
-					$(this).hide();
-        });
-
-        //DESCRIPTION
-        $('#description-des').click(function() {
-					resetHeaders();
-					$('#description-asc').css('color', '#f90');
-					$('#description-asc').css('background-image', 'url(images/orange-arrow-down.png)');
-					$('#description-asc').show();
-					$(this).hide();
-        });
-        $('#description-asc').click(function() {
-					resetHeaders();
-					$('#description-des').css('color', '#f90');
-					$('#description-des').css('background-image', 'url(images/orange-arrow-up.png)');
-					$('#description-des').show();
-					$(this).hide();
-        });
-
-        //META
-        $('#meta-des').click(function() {
-					resetHeaders();
-					$('#meta-asc').css('color', '#f90');
-					$('#meta-asc').css('background-image', 'url(images/orange-arrow-down.png)');
-					$('#meta-asc').show();
-					$(this).hide();
-        });
-        $('#meta-asc').click(function() {
-					resetHeaders();
-					$('#meta-des').css('color', '#f90');
-					$('#meta-des').css('background-image', 'url(images/orange-arrow-up.png)');
-					$('#meta-des').show();
-					$(this).hide();
-        });
-
-        //NARRATIVE
-        $('#narrative-des').click(function() {
-					resetHeaders();
-					$('#narrative-asc').css('color', '#f90');
-					$('#narrative-asc').css('background-image', 'url(images/orange-arrow-down.png)');
-					$('#narrative-asc').show();
-					$(this).hide();
-        });
-        $('#narrative-asc').click(function() {
-					resetHeaders();
-					$('#narrative-des').css('color', '#f90');
-					$('#narrative-des').css('background-image', 'url(images/orange-arrow-up.png)');
-					$('#narrative-des').show();
-					$(this).hide();
-        })
-
-    })
+		$("#tabs").tabs();
+  });
 </script>
 
 <div id="page-wrap">
-    <div id="inside">
-        <div id="header">
-            <a href="http://www.jbehave.org"><img src="images/jbehave-logo.png" alt="header"/></a>
-           
-        </div>
-        <div id="main-content">
-            <table summary="JBehave Navigator" cellspacing="0" cellpadding="0">
+  <div id="inside">
+      <div id="header">
+          <a href="http://www.jbehave.org"><img src="images/jbehave-logo.png" alt="header"/></a>
+      </div>
+      <div id="main-content">
+
+				<div id="tabs">
+					<ul>
+						<li><a href="#tabs-1">Stories</a></li>
+						<li><a href="#tabs-2">Steps</a></li>
+					</ul>
+					<div id="tabs-1">
+	          <table summary="JBehave Navigator" cellspacing="0" cellpadding="0">
             	<thead>
             		<!--
                 <tr>
                     <th colspan="5">Use columns to filter stories by content and/or search text in scenarios: <input name="search.scenarios"/></th>
                 </tr>
 								-->
-                <tr>
-                  <th class="status">
-                    <a href id="status-asc" ng:click="predicate = 'passed'">Status</a>
-										<a href id="status-des" ng:click="predicate = '-passed'">Status</a>
-                  </th>
+								<tr>
+									<th colspan="5" class="section air">Stories</th>
+								</tr>
+                <tr class="columnTitles">
+                  <th class="status first">
+										<a href id="status-asc" class="ascending" ng:click="predicate = 'passed'">Status</a>
+										<a href id="status-des" class="descending" ng:click="predicate = '-passed'">Status</a>
+									</th>
                   <th class="path">
-                  	<a href id="path-asc" ng:click="predicate = 'path'">Path</a>
-										<a href id="path-des" ng:click="predicate = '-path'">Path</a>
+                  	<a href id="path-asc" class="ascending" ng:click="predicate = 'path'">Path</a>
+										<a href id="path-des" class="descending" ng:click="predicate = '-path'">Path</a>
                   </th>
                   <th class="description">
-                    <a href id="description-asc" ng:click="predicate = 'description'">Description</a>
-										<a href id="description-des" ng:click="predicate = '-description'">Description</a>
+                    <a href id="description-asc" class="ascending" ng:click="predicate = 'description'">Description</a>
+										<a href id="description-des" class="descending" ng:click="predicate = '-description'">Description</a>
                   </th>
                   <th class="meta">
-                  	<a href id="meta-asc" ng:click="predicate = 'meta'">Meta</a>
-										<a href id="meta-des" ng:click="predicate = '-meta'">Meta</a>
+                  	<a href id="meta-asc" class="ascending" ng:click="predicate = 'meta'">Meta</a>
+										<a href id="meta-des" class="descending" ng:click="predicate = '-meta'">Meta</a>
                   </th>
                   <th class="narrative">
-										<a href id="narrative-asc" ng:click="predicate = 'narrative'">Narrative</a>
-										<a href id="narrative-des" ng:click="predicate = '-narrative'">Narrative</a>
+										<a href id="narrative-asc" class="ascending" ng:click="predicate = 'narrative'">Narrative</a>
+										<a href id="narrative-des" class="descending" ng:click="predicate = '-narrative'">Narrative</a>
                   </th>
-                  <th class="view">View</th>
+                  <th class="view last">View</th>
                 </tr>
                 <tr>
                   <th class="status"></th>
@@ -200,6 +132,9 @@
                   <th class="view"></th>
                 </tr>
 							</thead>
+							<tfoot>
+								<tr><td colspan="6">&nbsp;</td></tr>
+							</tfoot>
 							<tbody>
                 <tr ng:repeat="story in data.xref.stories.$filter(search).$orderBy(predicate)"
 										ng:click="showResults(story)" title="Click to view the story details">
@@ -216,47 +151,63 @@
                 </tr>
 							</tbody>
             </table>
-
-            <hr/>
-
-            <h2>Steps</h2>
-            <table cellspacing="0" cellpadding="0">
-	          <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Pattern</th>
-                  <th>Use Count</th>
-                </tr>
-                <tr>
-	              <th>
-	              	<select ng:init="stepSearch.type = ''" name="stepSearch.type" class="filterInput">
-	                  <option value="" selected="selected">**All**</option>
-	                  <option selected>GIVEN</option>
-	                  <option selected>WHEN</option>
-	                  <option selected>THEN</option>
-	                </select>
-	              </th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-
-
-              <tbody>
-                <tr ng:repeat="match in data.xref.stepMatches.$filter(stepSearch)">
-                  <td>{{match.type}}</td>
-                  <td>{{match.annotatedPattern}}</td>
-                  <td>{{match.usages.$size()}}</td>
-                 </tr>
-              </tbody>
-            </table>
-
-        </div>
-        <div id="footer">
-           <div class="left">Data Generated by {{data.xref.whatMadeThis}} on {{ data.xref.whenMade | date:'yyyy-MM-dd HH:mm:ss'}}</div>
-            <div class="clear"></div>
-        </div>
-        <div style="clear: both;"></div>
-    </div>
+					</div>
+					<div id="tabs-2">
+	          <table cellspacing="0" cellpadding="0">
+							<thead>
+								<tr>
+									<th colspan="3" class="section air">Steps</th>
+								</tr>
+								<tr class="columnTitles">
+									<th class="type first">
+										<a href id="type-asc" class="ascending" ng:click="stepPredicate = 'type'">Type</a>
+										<a href id="type-des" class="descending" ng:click="stepPredicate = '-type'">Type</a>
+									</th>
+									<th class="pattern">
+										<a href id="pattern-asc" class="ascending" ng:click="stepPredicate = 'annotatedPattern'">Pattern</a>
+										<a href id="pattern-des" class="descending" ng:click="stepPredicate = '-annotatedPattern'">Pattern</a>
+									</th>
+									<th class="usages last">
+										<a href id="usages-asc" class="ascending" ng:click="stepPredicate = 'usages.$size()'">Usages</a>
+										<a href id="usages-des" class="descending" ng:click="stepPredicate = '-usages.$size()'">Usages</a>
+									</th>
+								</tr>
+								<tr class="filters">
+									<th>
+										<select ng:init="stepSearch.type = ''" name="stepSearch.type" class="filterInput">
+											<option value="" selected="selected">- All -</option>
+											<option selected>Given</option>
+											<option selected>When</option>
+											<option selected>Then</option>
+										</select>
+									</th>
+									<th><input name="stepSearch.annotatedPattern" class="filterInput"/></th>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng:repeat="match in data.xref.stepMatches.$filter(stepSearch).$orderBy(stepPredicate)">
+									<td class="type">{{match.type}}</td>
+									<td class="pattern">{{match.annotatedPattern}}</td>
+									<td class="size">{{match.usages.$size()}}</td>
+									<!--
+									<td class="size">{{match.usages[0].story}}</td>
+									-->
+								</tr>
+							</tbody>
+						</table>
+					</div>
+      	</div>
+			</div>
+		
+			<div id="footer">
+				<div class="left">Data Generated by {{data.xref.whatMadeThis}} on {{ data.xref.whenMade | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+				<div class="right">JBehave &#169; 2003-2010</div>
+				<div class="clear"></div>
+			</div>
+		
+			<div style="clear: both;"></div>
+	</div>
+</div>	
 </body>
 </html>
