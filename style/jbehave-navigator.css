@@ -170,6 +170,7 @@ tbody td.status {
 
 tbody td a {
 	clear:both;
+	color:#3199ee !important;
 	display:block;
 }
 tbody td a:hover {
@@ -192,11 +193,11 @@ tbody tr:hover {
 }
 
 tbody tr:hover td a {
-	color:#fff;
+	color:#fff !important;
 }
 
 tbody tr:hover td a:hover {
-	color:#f90;
+	color:#f90 !important;
 }
 
 tbody tr.draft-true						{ background-color: #666; }
