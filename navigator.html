@@ -35,18 +35,6 @@
                 ]
             })
         },
-        showScenarios: function(story) {
-            var $dialog = $('<div></div>')
-                    .html('<pre>' + story.scenarios.replace("\n", "<br/>") + '</pre>')
-                    .dialog({
-                                width: 800,
-                                height: 400,
-                                autoOpen: false,
-                                title: 'Scenarios for ' + story.path
-                            });
-            $dialog.dialog('open');
-            // prevent the default action, e.g., following a link
-        },
         openEditTab: function(story) {
             alert("TODO");
         }
@@ -95,9 +83,8 @@
                     <table summary="JBehave Navigator" cellspacing="0" cellpadding="0">
                         <thead>
                         <tr>
-                            <th colspan="2" class="section air">Stories</th>
-                            <th class="section air" colspan="3">Filter by text in scenarios: <input
-                                    name="search.scenarios"/></th>
+                            <th colspan="2" class="section">Stories</th>
+                            <th colspan="3" class="section filter">Filter scenarios<input name="search.scenarios" class="filterInput"/></th>
                         </tr>
                         <tr class="columnTitles">
                             <th class="status first">
@@ -116,23 +103,21 @@
                                 <a href id="meta-asc" class="ascending" ng:click="predicate = 'meta'">Meta</a>
                                 <a href id="meta-des" class="descending" ng:click="predicate = '-meta'">Meta</a>
                             </th>
-                            <th class="narrative">
+                            <th class="narrative last">
                                 <a href id="narrative-asc" class="ascending" ng:click="predicate = 'narrative'">Narrative</a>
                                 <a href id="narrative-des" class="descending" ng:click="predicate = '-narrative'">Narrative</a>
                             </th>
-                            <th class="view last">View</th>
                         </tr>
                         <tr>
-                            <th class="status">Filter:</th>
+                            <th class="status filterLabel">Filter</th>
                             <th class="path"><input name="search.path" class="filterInput"/></th>
                             <th class="description"><input name="search.description" class="filterInput"/></th>
                             <th class="meta">
                                 <select name="search.meta" class="filterInput">
-                                    <option value="=" selected="selected">**All**</option>
+                                    <option value="=" selected="selected">- All -</option>
                                     <option ng:repeat="permutation in data.xref.meta">{{permutation}}</option>
                                 </select></th>
                             <th class="narrative"><input name="search.narrative" class="filterInput"/></th>
-                            <th class="view"></th>
                         </tr>
                         </thead>
                         <tfoot>
@@ -149,11 +134,6 @@
                             <td class="description">{{story.description}}</td>
                             <td class="meta">{{story.meta}}</td>
                             <td class="narrative">{{story.narrative | newlines | html}}</td>
-                            <td class="view">
-                                <a href ng:click="showResults(story)" title="Click to view results">Results</a><br/>
-                                <a href ng:click="showScenarios(story)" title="Click to view scenarios">Scenarios</a>
-                                <!--button ng:click="openEditTab(story)">Edit</button-->
-                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -165,7 +145,7 @@
                     <table cellspacing="0" cellpadding="0">
                         <thead>
                         <tr>
-                            <th colspan="3" class="section air">Steps</th>
+                            <th colspan="3" class="section">Steps</th>
                         </tr>
                         <tr class="columnTitles">
                             <th class="type first">
