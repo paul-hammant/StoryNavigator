@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>etsy_cart</title>
+<style type="text/css" media="all">
+@import url( "./style/jbehave-core.css" );
+</style>
+</head>
+<body>
+<div class="story">
+<h1>ShoppingCart functionality for Etsy.com</h1>
+<div class="path">etsy_cart.story</div>
+<div class="meta">
+<div class="keyword">Meta:</div>
+<div class="property">@category basic</div>
+<div class="property">@color blue</div>
+</div>
+<div class="narrative"><h2>Narrative:</h2>
+<div class="element inOrderTo"><span class="keyword inOrderTo">In order to</span> show the basic cart functionality</div>
+<div class="element asA"><span class="keyword asA">As a</span> user</div>
+<div class="element iWantTo"><span class="keyword iWantTo">I want to</span> add and remove items from the cart</div>
+</div>
+<div class="scenario">
+<h2>Scenario: Item can be added to cart</h2>
+<div class="step successful">Given that the cart is empty</div>
+<div class="step ignorable">!-- We don't care for which item is added to the cart</div>
+<div class="step successful">When I search for an item</div>
+<div class="step successful">And an item is added to the cart</div>
+<div class="step failed">Then the cart contains that item <span class="keyword failed">(FAILED)</span><br/><span class="message failed">java.lang.AssertionError: cart should have contained 59469771
+Expected: is &lt;true&gt;
+     got: &lt;false&gt;
+</span><br/><a color="black" target="jb_scn_shot" href="failed-scenario-cea1bfce-cea3-488e-ad7a-d1cf885a463b.png"><img src="images/failing_screenshot.png" alt="failing screenshot"/></a></div>
+<pre class="failure">java.lang.AssertionError: cart should have contained 59469771
+Expected: is &lt;true&gt;
+     got: &lt;false&gt;
+
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:21)
+	(groovy-static-method-invoke)
+	at com.github.tanob.groobe.AssertionSupport.assertWithFailureMessage(AssertionSupport.groovy:32)
+	(groovy-instance-method-invoke)
+	at com.github.tanob.groobe.AssertionSupport$_assertTransformedDelegateAndOneParam_closure3.doCall(AssertionSupport.groovy:20)
+	(groovy-closure-invoke)
+	at EtsyDotComSteps.cartHasThatItem(EtsyDotComSteps.groovy:112)
+	(reflection-invoke)
+	at org.jbehave.core.steps.StepCreator$ParameterizedStep.perform(StepCreator.java:430)
+	at org.jbehave.core.embedder.StoryRunner$FineSoFar.run(StoryRunner.java:261)</pre>
+</div>
+<div class="scenario">
+<h2>Scenario: Item can be removed from cart</h2>
+<div class="step successful">Given the cart contains one item</div>
+<div class="step successful">When the item is removed</div>
+<div class="step successful">Then the cart will be empty</div>
+</div>
+</div>
+
+</body>
+<!--  SyntaxHighlighter resources:  should be included at end of body -->
+<link rel="stylesheet" type="text/css" href="./style/sh-3.0.83/shCore.css"/>
+<link rel="stylesheet" type="text/css" href="./style/sh-3.0.83/shThemeRDark.css"/>
+<script language="javascript" src="./js/sh-3.0.83/shCore.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushBash.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushCss.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushDiff.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushGroovy.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushJava.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushJScript.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushPlain.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushPython.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushRuby.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushScala.js"></script>
+<script language="javascript" src="./js/sh-3.0.83/shBrushXml.js"></script>
+<script language="javascript" src="./js/shBrushBdd.js"></script>
+<script type="text/javascript">
+    SyntaxHighlighter.defaults['gutter'] = false;
+    SyntaxHighlighter.defaults['toolbar'] = false;    
+    SyntaxHighlighter.all();
+</script>
+</html>
