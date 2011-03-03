@@ -84,7 +84,7 @@
                         <thead>
                         <tr>
                             <th colspan="2" class="section">Stories</th>
-                            <th colspan="3" class="section filter">Filter scenarios<input name="search.scenarios" class="filterInput"/></th>
+                            <th colspan="4" class="section filter">Filter scenarios<input name="search.scenarios" class="filterInput"/></th>
                         </tr>
                         <tr class="columnTitles">
                             <th class="status first">
@@ -103,9 +103,13 @@
                                 <a href id="meta-asc" class="ascending" ng:click="predicate = 'meta'">Meta</a>
                                 <a href id="meta-des" class="descending" ng:click="predicate = '-meta'">Meta</a>
                             </th>
-                            <th class="narrative last">
+                            <th class="narrative">
                                 <a href id="narrative-asc" class="ascending" ng:click="predicate = 'narrative'">Narrative</a>
                                 <a href id="narrative-des" class="descending" ng:click="predicate = '-narrative'">Narrative</a>
+                            </th>
+                            <th class="duration last">
+                                <a href id="duration-asc" class="ascending" ng:click="predicate = 'duration'">Duration</a>
+                                <a href id="duration-des" class="descending" ng:click="predicate = '-duration'">Duration</a>
                             </th>
                         </tr>
                         <tr>
@@ -118,6 +122,7 @@
                                     <option ng:repeat="permutation in data.xref.meta">{{permutation}}</option>
                                 </select></th>
                             <th class="narrative"><input name="search.narrative" class="filterInput"/></th>
+                            <th class="duration"/>
                         </tr>
                         </thead>
                         <tfoot>
@@ -134,6 +139,7 @@
                             <td class="description">{{story.description}}</td>
                             <td class="meta">{{story.meta}}</td>
                             <td class="narrative">{{story.narrative | newlines | html}}</td>
+                            <td class="duration">{{story.duration / 1000 | number:1}}</td>
                         </tr>
                         </tbody>
                     </table>
