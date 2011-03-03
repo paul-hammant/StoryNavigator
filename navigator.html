@@ -60,6 +60,13 @@
             $(thisIdObj).show();
         });
         $("#tabs").tabs();
+        $(".show_hide").click(function() {
+        	if ($(this).is(":checked")) {
+        	   $("." + this.value).show();
+            } else {
+               $("." + this.value).hide();
+            }
+        });
     });
 </script>
 
@@ -75,7 +82,13 @@
                     <li><a href="#tabs-1">Stories</a></li>
                     <li><a href="#tabs-2">Steps</a></li>
                 </ul>
-
+                <div>View:<br/>
+                <input type="checkbox" class="show_hide" value="status" checked="true"> Status</input>
+                <input type="checkbox" class="show_hide" value="path" checked="true"> Path</input>
+                <input type="checkbox" class="show_hide" value="description" checked="true"> Description</input>
+                <input type="checkbox" class="show_hide" value="meta" checked="true"> Meta</input>
+                <input type="checkbox" class="show_hide" value="narrative" checked="true"> Narrative</input>
+                <input type="checkbox" class="show_hide" value="duration" checked="true"> Duration</input>                </div>
                 <!-- The Story List Tab -->
 
 
