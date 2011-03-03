@@ -35,6 +35,13 @@
                 ]
             })
         },
+
+        showUsages: function(match) {
+            this.s2.type = match.type;
+            this.s2.annotatedPattern = match.annotatedPattern;
+            $( "#usagesDialog" ).dialog();
+        },
+
         openEditTab: function(story) {
             alert("TODO");
         }
@@ -69,6 +76,23 @@
         });
     });
 </script>
+
+<div id="usagesDialog" title="Usages of Step">
+    <table summary="usages" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th class="section">Story</th>
+            <th class="section">Scenario</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng:repeat="use in data.xref.stepMatches.$filter(s2).usages">
+            <td class="section">{{use.story}}</td>
+            <td class="section">{{use.scenario}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 <div id="page-wrap">
     <div id="inside">
@@ -196,7 +220,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng:repeat="match in data.xref.stepMatches.$filter(stepSearch).$orderBy(stepPredicate)">
+                        <tr ng:repeat="match in data.xref.stepMatches.$filter(stepSearch).$orderBy(stepPredicate)" ng:click="showUsages(match)">
                             <td class="type">{{match.type}}</td>
                             <td class="pattern">{{match.annotatedPattern}}</td>
                             <td class="size">{{match.usages.$size()}}</td>
