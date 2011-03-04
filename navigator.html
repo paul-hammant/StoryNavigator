@@ -112,11 +112,12 @@
                 <input type="checkbox" class="show_hide" value="description" checked="true"> Description</input>
                 <input type="checkbox" class="show_hide" value="meta" checked="true"> Meta</input>
                 <input type="checkbox" class="show_hide" value="narrative" checked="true"> Narrative</input>
-                <input type="checkbox" class="show_hide" value="duration" checked="true"> Duration</input>                </div>
+                <input type="checkbox" class="show_hide" value="duration" checked="true"> Duration </input>                </div>
                 <!-- The Story List Tab -->
 
-
                 <div id="tabs-1">
+		            <span>Total Duration: {{data.xref.stories.$filter(search).$sum('duration') /1000 | number:0}} secs</span>
+	
                     <table summary="Navigator" cellspacing="0" cellpadding="0">
                         <thead>
                         <tr>
