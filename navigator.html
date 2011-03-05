@@ -37,9 +37,12 @@
         },
 
         showUsages: function(match) {
-            this.s2.type = match.type;
-            this.s2.annotatedPattern = match.annotatedPattern;
-            $( "#usagesDialog" ).dialog();
+	
+	        // pending Misko's fix for JQuery and Angular in 0.9.13 ?
+	
+            //this.s2.type = match.type;
+            //this.s2.annotatedPattern = match.annotatedPattern;
+            //$( "#usagesDialog" ).dialog();
         },
 
         openEditTab: function(story) {
