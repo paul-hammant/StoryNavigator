@@ -12,7 +12,7 @@ body {
 
 p, li {
 	font: 1em/1.2em;
-	color: #999991;
+	color: #999999;
 	margin-bottom: 10px;
 }
 
@@ -137,6 +137,7 @@ thead th.section {
 	font: 2.5em Arial Rounded MT Bold, Arial, Tahoma, sans-serif;
 	padding:0 8px 8px 8px;
 	text-transform:capitalize;
+	vertical-align:top;
 	-moz-border-radius-topleft: 4px;
 	-moz-border-radius-topright: 4px;
 	border-top-left-radius: 4px;
@@ -153,6 +154,13 @@ thead th.narrative		{ width:30% }
 thead th.type 			{ width:35% }
 thead th.pattern		{ width:45% }
 thead th.usages 		{ width:15% }
+
+thead th.duration.total {
+	color:#efefef;
+	font-size:1.1em;
+	text-align:center;
+	text-transform:lowercase;
+}
 
 thead th.filter {
 	color:#555;
@@ -227,9 +235,9 @@ tbody tr:hover td a:hover {
 	color:#f90 !important;
 }
 
-tbody tr.draft-true						{ background-color: #666; }
-tbody tr.draft-true td				{ color:#bbb; }
-tbody tr.draft-true:hover			{	background:#899; }
+tbody tr.draft-true				{ background-color: #666; }
+tbody tr.draft-true td			{ color:#bbb; }
+tbody tr.draft-true:hover		{ background:#899; }
 tbody tr.draft-true:hover td	{ color:#efefef; }
 
 tbody td.narrative:first-letter,
@@ -289,6 +297,25 @@ th.path input.filterInput {
 	margin: 10px 0;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+}
+
+#view-selector {
+	color:#777;
+	font-size:0.75em;
+	font-weight:normal;
+	margin-top:10px;
+}
+
+#view-selector ul {
+	display:inline;
+	margin:0;
+}
+
+#view-selector ul li {
+	color:#777;
+	display:inline;
+	font-family: Arial, Tahoma, sans-serif;
+	margin-left:5px;
 }
 	
 #header {
