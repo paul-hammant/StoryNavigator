@@ -155,11 +155,8 @@ thead th.type 			{ width:35% }
 thead th.pattern		{ width:45% }
 thead th.usages 		{ width:15% }
 
-thead th.duration.total {
-	color:#efefef;
-	font-size:1.1em;
-	text-align:center;
-	text-transform:lowercase;
+thead th.section p#stories-total {
+	font-size:0.45em;
 }
 
 thead th.filter {
@@ -181,6 +178,13 @@ thead th.filterLabel {
 	font-size:1.1em;
 	text-align:right;
 	text-transform:capitalize;
+}
+
+thead th.duration.total {
+	color:#efefef;
+	font-size:1.1em;
+	text-align:center;
+	text-transform:lowercase;
 }
 
 tbody {
