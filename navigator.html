@@ -106,7 +106,7 @@
 
             <div id="tabs">
                 <ul>
-                    <li><a href="#tabs-1">Stories</a></li>
+                    <li><a href="#tabs-1">Stories ({{data.xref.stories.$size()}})</a></li>
                     <li><a href="#tabs-2">Steps</a></li>
                 </ul>
                 
@@ -117,7 +117,10 @@
                     <table summary="Navigator" cellspacing="0" cellpadding="0">
                         <thead>
                         <tr>
-                            <th colspan="2" class="section">Stories</th>
+                            <th colspan="2" class="section">
+                            	Stories<br/>
+                            	<p id="stories-total">Showing {{data.xref.stories.$filter(search).$size()}} of {{data.xref.stories.$size()}} stories</p>
+                            </th>
                             <th colspan="4" class="section filter">
                             	Filter scenarios<input name="search.scenarios" class="filterInput"/>
 	                            <div id="view-selector">
