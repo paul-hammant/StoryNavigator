@@ -80,23 +80,6 @@
     });
 </script>
 
-<div id="usagesDialog" title="Usages of Step">
-    <table summary="usages" cellspacing="0" cellpadding="0">
-        <thead>
-        <tr>
-            <th class="section">Story</th>
-            <th class="section">Scenario</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng:repeat="use in data.xref.stepMatches.$filter(s2).usages">
-            <td class="section">{{use.story}}</td>
-            <td class="section">{{use.scenario}}</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
 <div id="page-wrap">
     <div id="inside">
         <div id="header">
