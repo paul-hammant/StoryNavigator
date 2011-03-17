@@ -54,18 +54,18 @@
     });
 
     $(document).ready(function() {
-        //RESET and SORT-HEADER HANDLER
+        //reset and sort-header handler
         $('thead th a').click(function() {
-            //INIT
+            //init
             var parentId = $(this).parent().parent().parent().parent().parent().attr("id");
             var thisId = this.id.substring(0, (this.id.length - 4));
             var thisIdObj = ((this.id).indexOf('-des') != -1) ? '#' + thisId + '-asc' : '#' + thisId + '-des';
-            //RESET
+            //reset
             $('#' + parentId + ' thead th a').each(function() {
                 $(this).attr('class', 'reset');
             });
             $(this).hide();
-            //SORT-HANDLER
+            //sort-handler
             $(thisIdObj).attr('class', 'ascending');
             $(thisIdObj).show();
         });
@@ -79,23 +79,6 @@
         });
     });
 </script>
-
-<div id="usagesDialog" title="Usages of Step">
-    <table summary="usages" cellspacing="0" cellpadding="0">
-        <thead>
-        <tr>
-            <th class="section">Story</th>
-            <th class="section">Scenario</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng:repeat="use in data.xref.stepMatches.$filter(s2).usages">
-            <td class="section">{{use.story}}</td>
-            <td class="section">{{use.scenario}}</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 
 <div id="page-wrap">
     <div id="inside">
