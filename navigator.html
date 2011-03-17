@@ -54,18 +54,18 @@
     });
 
     $(document).ready(function() {
-        //RESET and SORT-HEADER HANDLER
+        //reset and sort-header handler
         $('thead th a').click(function() {
-            //INIT
+            //init
             var parentId = $(this).parent().parent().parent().parent().parent().attr("id");
             var thisId = this.id.substring(0, (this.id.length - 4));
             var thisIdObj = ((this.id).indexOf('-des') != -1) ? '#' + thisId + '-asc' : '#' + thisId + '-des';
-            //RESET
+            //reset
             $('#' + parentId + ' thead th a').each(function() {
                 $(this).attr('class', 'reset');
             });
             $(this).hide();
-            //SORT-HANDLER
+            //sort-handler
             $(thisIdObj).attr('class', 'ascending');
             $(thisIdObj).show();
         });
