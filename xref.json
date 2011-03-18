@@ -1,5 +1,5 @@
 {"xref": {
-  "whenMade": 1298291282098,
+  "whenMade": 1300318188961,
   "createdBy": "JBehave",
   "meta": [
     "category=advanced",
@@ -17,8 +17,9 @@
       "html": "advanced_search.html",
       "meta": "category=advanced\u000acolor=red\u000a",
       "scenarios": "Scenario:Advanced Search for a hat\u000aGiven I am searching on Etsy.com\u000aWhen I specify the Knitting sub category\u000aAnd I search for hat\u000aThen there are search results\u000a\u000a\u000aScenario:Advanced Search for a ring\u000aGiven I am searching on Etsy.com\u000aWhen I specify the Jewelry sub category\u000aAnd I search for ring\u000aThen there are search results\u000a\u000a\u000a",
-      "passed": false,
-      "duration": 3740
+      "passed": true,
+      "started": 1300318110109,
+      "duration": 25540
     },
     {
       "description": "Browse Etsy.com",
@@ -28,8 +29,9 @@
       "html": "etsy_browse.html",
       "meta": "category=browsing\u000acolor=red\u000a",
       "scenarios": "Scenario:Browsing around the site for items\u000aGiven I am on etsy.com\u000aWhen I want to browse through a treasury gallery\u000a!-- We don't care for the results, just the gallery\u000aThen results will be displayed in the gallery\u000a\u000a\u000a",
-      "passed": false,
-      "duration": 3757
+      "passed": true,
+      "started": 1300318135657,
+      "duration": 20685
     },
     {
       "description": "ShoppingCart functionality for Etsy.com",
@@ -40,7 +42,8 @@
       "meta": "category=basic\u000acolor=blue\u000a",
       "scenarios": "Scenario:Item can be added to cart\u000aGiven that the cart is empty\u000a!-- We don't care for which item is added to the cart\u000aWhen I search for an item\u000aAnd an item is added to the cart\u000aThen the cart contains that item\u000a\u000a\u000aScenario:Item can be removed from cart\u000aGiven the cart contains one item\u000aWhen the item is removed\u000aThen the cart will be empty\u000a\u000a\u000a",
       "passed": false,
-      "duration": 4777
+      "started": 1300318156346,
+      "duration": 32368
     }
   ],
   "stepMatches": [
@@ -75,13 +78,13 @@
       "usages": [
         {
           "story": "advanced_search.story",
-          "scenario": "Advanced Search for a ring",
-          "step": "When I specify the Jewelry sub category"
+          "scenario": "Advanced Search for a hat",
+          "step": "When I specify the Knitting sub category"
         },
         {
           "story": "advanced_search.story",
-          "scenario": "Advanced Search for a hat",
-          "step": "When I specify the Knitting sub category"
+          "scenario": "Advanced Search for a ring",
+          "step": "When I specify the Jewelry sub category"
         }
       ]
     },
@@ -116,13 +119,13 @@
       "usages": [
         {
           "story": "advanced_search.story",
-          "scenario": "Advanced Search for a hat",
-          "step": "And I search for hat"
+          "scenario": "Advanced Search for a ring",
+          "step": "And I search for ring"
         },
         {
           "story": "advanced_search.story",
-          "scenario": "Advanced Search for a ring",
-          "step": "And I search for ring"
+          "scenario": "Advanced Search for a hat",
+          "step": "And I search for hat"
         }
       ]
     },
@@ -133,12 +136,12 @@
       "usages": [
         {
           "story": "advanced_search.story",
-          "scenario": "Advanced Search for a hat",
+          "scenario": "Advanced Search for a ring",
           "step": "Given I am searching on Etsy.com"
         },
         {
           "story": "advanced_search.story",
-          "scenario": "Advanced Search for a ring",
+          "scenario": "Advanced Search for a hat",
           "step": "Given I am searching on Etsy.com"
         }
       ]

@@ -4,7 +4,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <script type="text/javascript" ng:autobind src="js/angular-0.9.12.min.js"></script>
+    <script type="text/javascript" ng:autobind src="js/angular-0.9.13.min.js"></script>
     <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min-1.7.1.js"></script>
     <script type="text/javascript" src="js/jquery-framedialog-1.1.2.js"></script>
@@ -54,18 +54,18 @@
     });
 
     $(document).ready(function() {
-        //RESET and SORT-HEADER HANDLER
+        //reset and sort-header handler
         $('thead th a').click(function() {
-            //INIT
+            //init
             var parentId = $(this).parent().parent().parent().parent().parent().attr("id");
             var thisId = this.id.substring(0, (this.id.length - 4));
             var thisIdObj = ((this.id).indexOf('-des') != -1) ? '#' + thisId + '-asc' : '#' + thisId + '-des';
-            //RESET
+            //reset
             $('#' + parentId + ' thead th a').each(function() {
                 $(this).attr('class', 'reset');
             });
             $(this).hide();
-            //SORT-HANDLER
+            //sort-handler
             $(thisIdObj).attr('class', 'ascending');
             $(thisIdObj).show();
         });
@@ -80,23 +80,6 @@
     });
 </script>
 
-<div id="usagesDialog" title="Usages of Step">
-    <table summary="usages" cellspacing="0" cellpadding="0">
-        <thead>
-        <tr>
-            <th class="section">Story</th>
-            <th class="section">Scenario</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng:repeat="use in data.xref.stepMatches.$filter(s2).usages">
-            <td class="section">{{use.story}}</td>
-            <td class="section">{{use.scenario}}</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
 <div id="page-wrap">
     <div id="inside">
         <div id="header">
@@ -106,26 +89,35 @@
 
             <div id="tabs">
                 <ul>
-                    <li><a href="#tabs-1">Stories</a></li>
+                    <li><a href="#tabs-1">Stories ({{data.xref.stories.$size()}})</a></li>
                     <li><a href="#tabs-2">Steps</a></li>
                 </ul>
-                <div>View:<br/>
-                <input type="checkbox" class="show_hide" value="status" checked="true"> Status</input>
-                <input type="checkbox" class="show_hide" value="path" checked="true"> Path</input>
-                <input type="checkbox" class="show_hide" value="description" checked="true"> Description</input>
-                <input type="checkbox" class="show_hide" value="meta" checked="true"> Meta</input>
-                <input type="checkbox" class="show_hide" value="narrative" checked="true"> Narrative</input>
-                <input type="checkbox" class="show_hide" value="duration" checked="true"> Duration </input>                </div>
+                
                 <!-- The Story List Tab -->
-
-                <div id="tabs-1">
-		            <span>Total Duration: {{data.xref.stories.$filter(search).$sum('duration') /1000 | number:0}} secs</span>
+	            <div id="tabs-1">
+		            <span></span>
 	
                     <table summary="Navigator" cellspacing="0" cellpadding="0">
                         <thead>
                         <tr>
-                            <th colspan="2" class="section">Stories</th>
-                            <th colspan="4" class="section filter">Filter scenarios<input name="search.scenarios" class="filterInput"/></th>
+                            <th colspan="2" class="section">
+                            	Stories<br/>
+                            	<p id="stories-total">Showing {{data.xref.stories.$filter(search).$size()}} of {{data.xref.stories.$size()}} stories</p>
+                            </th>
+                            <th colspan="4" class="section filter">
+                            	Filter scenarios<input name="search.scenarios" class="filterInput"/>
+	                            <div id="view-selector">
+								<label>View:</label>
+								<ul>
+									<li><input type="checkbox" class="show_hide" value="status" checked="true"> Status</input></li>
+									<li><input type="checkbox" class="show_hide" value="path" checked="true"> Path</input></li>
+									<li><input type="checkbox" class="show_hide" value="description" checked="true"> Description</input></li>
+									<li><input type="checkbox" class="show_hide" value="meta" checked="true"> Meta</input></li>
+									<li><input type="checkbox" class="show_hide" value="narrative" checked="true"> Narrative</input></li>
+									<li><input type="checkbox" class="show_hide" value="duration" checked="true"> Duration </input></li>
+								</ul>
+							</div>
+                            </th>
                         </tr>
                         <tr class="columnTitles">
                             <th class="status first">
@@ -163,7 +155,7 @@
                                     <option ng:repeat="permutation in data.xref.meta">{{permutation}}</option>
                                 </select></th>
                             <th class="narrative"><input name="search.narrative" class="filterInput"/></th>
-                            <th class="duration"/>
+                            <th class="duration total">{{data.xref.stories.$filter(search).$sum('duration') /1000 | number:0}} secs</th>
                         </tr>
                         </thead>
                         <tfoot>
