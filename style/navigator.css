@@ -98,6 +98,7 @@ a#narrative-asc,
 a#type-asc,
 a#pattern-asc,
 a#usages-asc,
+a#started-asc,
 a#duration-asc{
 	display:none;
 	background-image:url('../images/orange-arrow-down.png');
@@ -111,6 +112,7 @@ a#narrative-des,
 a#type-des,
 a#pattern-des,
 a#usages-des,
+a#started-des,
 a#duration-des {
 	background-image:url('../images/orange-arrow-up.png');
 }
@@ -144,12 +146,13 @@ thead th.section {
 	border-top-right-radius: 4px;
 }
 
-thead th.duration       { width:5% }
+thead th.duration       { width:4% }
+thead th.started        { width:4% }
 thead th.status 		{ width:10% }
-thead th.function		{ width:15% }
-thead th.feature 		{ width:15% }
-thead th.description	{ width:25% }
-thead th.narrative		{ width:30% }
+thead th.function		{ width:10% }
+thead th.feature 		{ width:10% }
+thead th.description	{ width:31% }
+thead th.narrative		{ width:31% }
 
 thead th.type 			{ width:35% }
 thead th.pattern		{ width:45% }
@@ -180,7 +183,7 @@ thead th.filterLabel {
 	text-transform:capitalize;
 }
 
-thead th.duration.total {
+thead th.started.total, thead th.duration.total {
 	color:#efefef;
 	font-size:1.1em;
 	text-align:center;
@@ -222,7 +225,7 @@ tbody td.description {
   text-transform:capitalize;
 }
 
-tbody td.type  span {
+tbody td.type span {
 	text-transform:capitalize;
 }
 
@@ -267,7 +270,7 @@ tfoot tr  td{
 
 select.filterInput {
 	text-transform:capitalize;
-	width:165px;
+	width:120px;
 }
 
 th.status select.filterInput {
@@ -275,11 +278,11 @@ th.status select.filterInput {
 }
 
 input.filterInput {
-	width:235px;
+	width:180px;
 }
 
 th.path input.filterInput {
-	width:165px;
+	width:140px;
 }
 
 #page-wrap {
