@@ -1,3 +1,4 @@
 #!/bin/sh
 
-jar -cvfM StoryNavigator-1.0.zip js style/navigator.css style/jquery-ui.css images navigator.html 
+mkdir downloads
+jar -cvfM downloads/StoryNavigator-1.x.zip js style/navigator.css style/jquery-ui.css images navigator.html 

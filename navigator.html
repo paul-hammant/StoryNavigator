@@ -104,7 +104,7 @@
                             	Stories<br/>
                             	<p id="stories-total">Showing {{data.xref.stories.$filter(search).$size()}} of {{data.xref.stories.$size()}} stories</p>
                             </th>
-                            <th colspan="4" class="section filter">
+                            <th colspan="5" class="section filter">
                             	Filter scenarios<input name="search.scenarios" class="filterInput"/>
 	                            <div id="view-selector">
 								<label>View:</label>
@@ -114,6 +114,7 @@
 									<li><input type="checkbox" class="show_hide" value="description" checked="true"> Description</input></li>
 									<li><input type="checkbox" class="show_hide" value="meta" checked="true"> Meta</input></li>
 									<li><input type="checkbox" class="show_hide" value="narrative" checked="true"> Narrative</input></li>
+									<li><input type="checkbox" class="show_hide" value="started" checked="true"> Started </input></li>
 									<li><input type="checkbox" class="show_hide" value="duration" checked="true"> Duration </input></li>
 								</ul>
 							</div>
@@ -140,6 +141,10 @@
                                 <a href id="narrative-asc" class="ascending" ng:click="predicate = 'narrative'">Narrative</a>
                                 <a href id="narrative-des" class="descending" ng:click="predicate = '-narrative'">Narrative</a>
                             </th>
+                            <th class="started">
+                                <a href id="started-asc" class="ascending" ng:click="predicate = 'started'">Started</a>
+                                <a href id="started-des" class="descending" ng:click="predicate = '-started'">Started</a>
+                            </th>
                             <th class="duration last">
                                 <a href id="duration-asc" class="ascending" ng:click="predicate = 'duration'">Duration</a>
                                 <a href id="duration-des" class="descending" ng:click="predicate = '-duration'">Duration</a>
@@ -155,12 +160,13 @@
                                     <option ng:repeat="permutation in data.xref.meta">{{permutation}}</option>
                                 </select></th>
                             <th class="narrative"><input name="search.narrative" class="filterInput"/></th>
+                            <th class="started"/>
                             <th class="duration total">{{data.xref.stories.$filter(search).$sum('duration') /1000 | number:0}} secs</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
-                            <td colspan="6">&nbsp;</td>
+                            <td colspan="7">&nbsp;</td>
                         </tr>
                         </tfoot>
                         <tbody>
@@ -172,6 +178,10 @@
                             <td class="description">{{story.description}}</td>
                             <td class="meta">{{story.meta}}</td>
                             <td class="narrative">{{story.narrative | newlines | html}}</td>
+                            <td class="started">
+                                <div>{{story.started | date:'MM-dd-yyyy'}}</div>
+                                <div>{{story.started | date:'HH:mm:ss'}}</div>
+                            </td>
                             <td class="duration">{{story.duration / 1000 | number:1}}</td>
                         </tr>
                         </tbody>
