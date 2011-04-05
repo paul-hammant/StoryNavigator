@@ -6,9 +6,9 @@ open navigator.html to see this working
 
 open xref.json to see the data in question
 
-# Running this without cloning out
+# Running this without cloning it
 
-To see a live app, visit: (http://paul-hammant.github.com/StoryNavigator)[http://paul-hammant.github.com/StoryNavigator]
+To see a live app, visit: [http://paul-hammant.github.com/StoryNavigator](http://paul-hammant.github.com/StoryNavigator)
 
 # Collaboration
 
