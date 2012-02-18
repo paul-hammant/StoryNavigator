@@ -64,6 +64,10 @@ thead th {
 	text-transform:uppercase;
 }
 
+span.ordered {
+	color: #FF9900;
+}
+
 thead tr.columnTitles  th.first{
 	-moz-border-radius-topleft: 4px;
 	border-top-left-radius: 4px;
