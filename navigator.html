@@ -17,24 +17,29 @@ If learning Angular by reading this source file, take note of these:
      ng:init  - setting initial values in the model
 
      ng:show is quite a trick - some elements appear to share space on the page or be redundant .. but 
-     only one is shown at a time by virture of locally opposite ng:show expressions.
+     only one is shown at a time by virtue of locally opposite ng:show expressions.
 
-  3) the ng:repeat iterations through the array, are subject to ordering and subsetting. See:
+  3) the ng:repeat iterations through the array, are subject to ordering and sub-setting. See:
     
-     .$filter  -  subsetting 
-     .$orderBy  - reordering the array for the purposes of display.
+     .$filter(var)  -  sub-setting 
+     .$orderBy(var)  - reordering the array for the purposes of display.
 
   4) We're using some aggregate functions on lists. Principally:
 
      $size()  - gives us a number of matching rows
-     $sum('duration')  - the sum of all duration for all the rows
+     $sum(var)  - the sum of all duration for all the rows
 
   5) Some filters
 
    | date  - outputs a date format
    | number  - outputs a number format.
 
-  General Resources: http://docs.angularjs.org/#!/api/
+  
+  General Resources: 
+ 
+      http://docs.angularjs.org/#!/api/   - Angular's API docs
+      https://github.com/paul-hammant/StoryNavigator/blob/gh-pages/navigator.html   - this file in-situ on Github (colored - yay!)
+      http://paulhammant.com/   - author's blog.
 
 -->
 
