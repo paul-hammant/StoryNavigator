@@ -106,18 +106,6 @@ thead th.section {
 	border-top-right-radius: 4px;
 }
 
-thead th.duration       { width:4% }
-thead th.started        { width:4% }
-thead th.status 		{ width:10% }
-thead th.function		{ width:10% }
-thead th.feature 		{ width:10% }
-thead th.description	{ width:31% }
-thead th.narrative		{ width:31% }
-
-thead th.type 			{ width:35% }
-thead th.pattern		{ width:45% }
-thead th.usages 		{ width:15% }
-
 thead th.section p#stories-total {
 	font-size:0.45em;
 }
