@@ -54,6 +54,7 @@ table {
 }
 
 thead th {
+	white-space: nowrap;
 	background-color:#444;
 	border-top:0px;
 	color: #3199ee;
