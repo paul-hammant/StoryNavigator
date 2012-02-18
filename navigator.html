@@ -35,23 +35,8 @@
                 ]
             })
         };
-
-        // show a usages of a step
-        this.showUsages = function(match) {
-	
-	        // pending Misko's fix for JQuery and Angular in 0.9.13 ?
-	
-            //this.s2.type = match.type;
-            //this.s2.annotatedPattern = match.annotatedPattern;
-            //$( "#usagesDialog" ).dialog();
-        };
-
-        // edit the story
-        this.openEditTab = function(story) {
-            alert("TODO");
-        };
-
     }
+
     MyController.$inject = ["$resource"];
 
     // Sometimes story next has newline chars in it.
@@ -213,7 +198,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng:repeat="match in data.xref.stepMatches.$filter(stepSearch).$orderBy(stepPredicate)" ng:click="showUsages(match)">
+                        <tr ng:repeat="match in data.xref.stepMatches.$filter(stepSearch).$orderBy(stepPredicate)">
                             <td class="type">{{match.type}}</td>
                             <td class="pattern">{{match.annotatedPattern}}</td>
                             <td class="size">{{match.usages.$size()}}</td>
