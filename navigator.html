@@ -18,6 +18,7 @@
     function MyController($resource) {
         this.data = $resource("xref.json").get({});
         this.c = {};
+        this.ord = 'passed';
     }
     MyController.$inject = ["$resource"];
     MyController.prototype = {
@@ -54,21 +55,6 @@
     });
 
     $(document).ready(function() {
-        //reset and sort-header handler
-        $('thead th a').click(function() {
-            //init
-            var parentId = $(this).parent().parent().parent().parent().parent().attr("id");
-            var thisId = this.id.substring(0, (this.id.length - 4));
-            var thisIdObj = ((this.id).indexOf('-des') != -1) ? '#' + thisId + '-asc' : '#' + thisId + '-des';
-            //reset
-            $('#' + parentId + ' thead th a').each(function() {
-                $(this).attr('class', 'reset');
-            });
-            $(this).hide();
-            //sort-handler
-            $(thisIdObj).attr('class', 'ascending');
-            $(thisIdObj).show();
-        });
         $("#tabs").tabs();
     });
 </script>
@@ -114,34 +100,41 @@
                             </th>
                         </tr>
                         <tr class="columnTitles">
-                            <th ng:show="c.status" class="status first">
-                                <a href id="status-asc" class="ascending" ng:click="predicate = 'passed'">Status</a>
-                                <a href id="status-des" class="descending" ng:click="predicate = '-passed'">Status</a>
+                            <th style="white-space: nowrap;" ng:show="c.status" class="status first">
+	                            <span ng:show="ord != '-passed' &amp;&amp; ord != 'passed' " ng:click="ord = 'passed'">Status</span>
+                                <span ng:show="ord == '-passed'" ng:click="ord = 'passed'">Status<img src="images/orange-arrow-up.png"/></span>
+                                <span ng:show="ord == 'passed'" ng:click="ord = '-passed'">Status<img src="images/orange-arrow-down.png"/></span>
                             </th>
-                            <th ng:show="c.path" class="path">
-                                <a href id="path-asc" class="ascending" ng:click="predicate = 'path'">Path</a>
-                                <a href id="path-des" class="descending" ng:click="predicate = '-path'">Path</a>
+                            <th style="white-space: nowrap;" ng:show="c.path" class="path">
+	                            <span ng:show="ord != '-path' &amp;&amp; ord != 'path' " ng:click="ord = 'path'">Path</span>
+                                <span ng:show="ord == '-path'" ng:click="ord = 'path'">Path<img src="images/orange-arrow-up.png"/></span>
+                                <span ng:show="ord == 'path'" ng:click="ord = '-path'">Path<img src="images/orange-arrow-down.png"/></span>
                             </th>
-                            <th ng:show="c.description" class="description">
-                                <a href id="description-asc" class="ascending" ng:click="predicate = 'description'">Description</a>
-                                <a href id="description-des" class="descending" ng:click="predicate = '-description'">Description</a>
-                            </th>
-                            <th ng:show="c.meta" class="meta">
-                                <a href id="meta-asc" class="ascending" ng:click="predicate = 'meta'">Meta</a>
-                                <a href id="meta-des" class="descending" ng:click="predicate = '-meta'">Meta</a>
-                            </th>
-                            <th ng:show="c.narrative" class="narrative">
-                                <a href id="narrative-asc" class="ascending" ng:click="predicate = 'narrative'">Narrative</a>
-                                <a href id="narrative-des" class="descending" ng:click="predicate = '-narrative'">Narrative</a>
-                            </th>
-                            <th ng:show="c.started" class="started">
-                                <a href id="started-asc" class="ascending" ng:click="predicate = 'started'">Started</a>
-                                <a href id="started-des" class="descending" ng:click="predicate = '-started'">Started</a>
-                            </th>
-                            <th ng:show="c.duration" class="duration last">
-                                <a href id="duration-asc" class="ascending" ng:click="predicate = 'duration'">Duration</a>
-                                <a href id="duration-des" class="descending" ng:click="predicate = '-duration'">Duration</a>
-                            </th>
+							<th style="white-space: nowrap;" ng:show="c.description" class="description">
+	                            <span ng:show="ord != '-description' &amp;&amp; ord != 'description' " ng:click="ord = 'description'">Description</span>
+							    <span ng:show="ord == '-description'" ng:click="ord = 'description'">Description<img src="images/orange-arrow-up.png"/></span>
+							    <span ng:show="ord == 'description'" ng:click="ord = '-description'">Description<img src="images/orange-arrow-down.png"/></span>
+							</th>
+							<th style="white-space: nowrap;" ng:show="c.meta" class="meta">
+	                            <span ng:show="ord != '-meta' &amp;&amp; ord != 'meta' " ng:click="ord = 'meta'">Meta</span>
+							    <span ng:show="ord == '-meta'" ng:click="ord = 'meta'">Meta<img src="images/orange-arrow-up.png"/></span>
+							    <span ng:show="ord == 'meta'" ng:click="ord = '-meta'">Meta<img src="images/orange-arrow-down.png"/></span>
+							</th>
+							<th style="white-space: nowrap;" ng:show="c.narrative" class="narrative">
+	                            <span ng:show="ord != '-narrative' &amp;&amp; ord != 'narrative' " ng:click="ord = 'narrative'">Narrative</span>
+							    <span ng:show="ord == '-narrative'" ng:click="ord = 'narrative'">narrative<img src="images/orange-arrow-up.png"/></span>
+							    <span ng:show="ord == 'narrative'" ng:click="ord = '-narrative'">narrative<img src="images/orange-arrow-down.png"/></span>
+							</th>
+							<th style="white-space: nowrap;" ng:show="c.started" class="started">
+	                            <span ng:show="ord != '-started' &amp;&amp; ord != 'started' " ng:click="ord = 'started'">Started</span>
+							    <span ng:show="ord == '-started'" ng:click="ord = 'started'">Started<img src="images/orange-arrow-up.png"/></span>
+							    <span ng:show="ord == 'started'" ng:click="ord = '-started'">Started<img src="images/orange-arrow-down.png"/></span>
+							</th>
+							<th style="white-space: nowrap;" ng:show="c.duration" class="duration">
+	                            <span ng:show="ord != '-duration' &amp;&amp; ord != 'duration' " ng:click="ord = 'duration'">Duration</span>
+							    <span ng:show="ord == '-duration'" ng:click="ord = 'duration'">Duration<img src="images/orange-arrow-up.png"/></span>
+							    <span ng:show="ord == 'duration'" ng:click="ord = '-duration'">Duration<img src="images/orange-arrow-down.png"/></span>
+							</th>
                         </tr>
                         <tr>
                             <th ng:show="c.status" class="status filterLabel">Filter</th>
@@ -163,7 +156,7 @@
                         </tr>
                         </tfoot>
                         <tbody>
-                        <tr ng:repeat="story in data.xref.stories.$filter(search).$orderBy(predicate)"
+                        <tr ng:repeat="story in data.xref.stories.$filter(search).$orderBy(ord)"
                             ng:click="showResults(story)" title="Click to view the story details">
                             <td ng:show="c.status" class="status"><img src="images/passed-{{story.passed}}.png"
                                                     alt="Story Passed == {{story.passed}}"/></td>
