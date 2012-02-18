@@ -16,8 +16,7 @@
 
 <script type="text/javascript">
     function MyController($resource) {
-        this.Story = $resource("xref.json");
-        this.data = this.Story.get({});
+        this.data = $resource("xref.json").get({});
         this.c = {};
     }
     MyController.$inject = ["$resource"];
