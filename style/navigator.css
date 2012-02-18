@@ -54,6 +54,7 @@ table {
 }
 
 thead th {
+	white-space: nowrap;
 	background-color:#444;
 	border-top:0px;
 	color: #3199ee;
@@ -61,6 +62,10 @@ thead th {
 	padding:10px;
 	text-align:left;
 	text-transform:uppercase;
+}
+
+span.ordered {
+	color: #FF9900;
 }
 
 thead tr.columnTitles  th.first{
@@ -90,47 +95,6 @@ thead th a {
 	padding:10px 40px 10px 0;
 }
 
-a#status-asc,
-a#path-asc,
-a#description-asc,
-a#meta-asc,
-a#narrative-asc,
-a#type-asc,
-a#pattern-asc,
-a#usages-asc,
-a#started-asc,
-a#duration-asc{
-	display:none;
-	background-image:url('../images/orange-arrow-down.png');
-}
-
-a#status-des,
-a#path-des,
-a#description-des,
-a#meta-des,
-a#narrative-des,
-a#type-des,
-a#pattern-des,
-a#usages-des,
-a#started-des,
-a#duration-des {
-	background-image:url('../images/orange-arrow-up.png');
-}
-
-thead th a.ascending {
-	color:#f90;
-	background-image:url('../images/orange-arrow-down.png');
-}
-
-thead th a.descending {
-	color:#f90;
-	background-image:url('../images/orange-arrow-up.png');
-}
-
-thead th a.reset {
-	color:#3199ee !important;
-	background-image:none !important;
-}
 
 thead th.section {
 	background:#ccc;
@@ -145,18 +109,6 @@ thead th.section {
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 }
-
-thead th.duration       { width:4% }
-thead th.started        { width:4% }
-thead th.status 		{ width:10% }
-thead th.function		{ width:10% }
-thead th.feature 		{ width:10% }
-thead th.description	{ width:31% }
-thead th.narrative		{ width:31% }
-
-thead th.type 			{ width:35% }
-thead th.pattern		{ width:45% }
-thead th.usages 		{ width:15% }
 
 thead th.section p#stories-total {
 	font-size:0.45em;
