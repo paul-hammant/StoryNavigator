@@ -153,6 +153,12 @@ If learning Angular by reading this source file, take note of these:
                   </div>
                 </th>
               </tr>
+
+              <!-- 
+                  For each of these table headers, there is three alternate <span> elements that could be displayed within.  
+                  Each one has a different ng:show directive, and only one will display at a time. Welcome to Angular!
+              -->
+
               <tr class="columnTitles">
                 <th ng:show="c.status" class="status first"> 
                   <span ng:show="ord != '-passed' &amp;&amp; ord != 'passed' " ng:click="ord = 'passed'">Status<img src="images/arrow-blank.png"/></span> 
