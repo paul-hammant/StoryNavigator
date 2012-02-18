@@ -91,47 +91,6 @@ thead th a {
 	padding:10px 40px 10px 0;
 }
 
-a#status-asc,
-a#path-asc,
-a#description-asc,
-a#meta-asc,
-a#narrative-asc,
-a#type-asc,
-a#pattern-asc,
-a#usages-asc,
-a#started-asc,
-a#duration-asc{
-	display:none;
-	background-image:url('../images/orange-arrow-down.png');
-}
-
-a#status-des,
-a#path-des,
-a#description-des,
-a#meta-des,
-a#narrative-des,
-a#type-des,
-a#pattern-des,
-a#usages-des,
-a#started-des,
-a#duration-des {
-	background-image:url('../images/orange-arrow-up.png');
-}
-
-thead th a.ascending {
-	color:#f90;
-	background-image:url('../images/orange-arrow-down.png');
-}
-
-thead th a.descending {
-	color:#f90;
-	background-image:url('../images/orange-arrow-up.png');
-}
-
-thead th a.reset {
-	color:#3199ee !important;
-	background-image:none !important;
-}
 
 thead th.section {
 	background:#ccc;
