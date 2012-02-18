@@ -224,9 +224,20 @@ If learning Angular by reading this source file, take note of these:
                 <th colspan="3" class="section">Steps</th>
               </tr>
               <tr class="columnTitles">
-                <th class="type first"> <span ng:show="ord2 != '-type' &amp;&amp; ord2 != 'type' " ng:click="ord2 = 'type'">Type<img src="images/arrow-blank.png"/></span> <span ng:show="ord2 == '-type'" ng:click="ord2 = 'type'">Type<img src="images/arrow-up.png"/></span> <span ng:show="ord2 == 'type'" ng:click="ord2 = '-type'">Type<img src="images/arrow-down.png"/></span> </th>
-                <th class="pattern"> <span ng:show="ord2 != '-annotatedPattern' &amp;&amp; ord2 != 'annotatedPattern' " ng:click="ord2 = 'annotatedPattern'">Pattern<img src="images/arrow-blank.png"/></span> <span ng:show="ord2 == '-annotatedPattern'" ng:click="ord2 = 'annotatedPattern'">Pattern<img src="images/arrow-up.png"/></span> <span ng:show="ord2 == 'annotatedPattern'" ng:click="ord2 = '-annotatedPattern'">Pattern<img src="images/arrow-down.png"/></span> </th>
-                <th class="usages last"> <span ng:show="ord2 != '-usages.$size()' &amp;&amp; ord2 != 'usages.$size()' " ng:click="ord2 = 'usages.$size()'">Usages<img src="images/arrow-blank.png"/></span> <span ng:show="ord2 == '-usages.$size()'" ng:click="ord2 = 'usages.$size()'">Usages<img src="images/arrow-up.png"/></span> <span ng:show="ord2 == 'usages.$size()'" ng:click="ord2 = '-usages.$size()'">Usages<img src="images/arrow-down.png"/></span> </th>
+                <th class="type first"> 
+                  <span ng:show="ord2 != '-type' &amp;&amp; ord2 != 'type' " ng:click="ord2 = 'type'">Type<img src="images/arrow-blank.png"/></span> 
+                  <span class="ordered" ng:show="ord2 == '-type'" ng:click="ord2 = 'type'">Type<img src="images/arrow-up.png"/></span> 
+                  <span class="ordered" ng:show="ord2 == 'type'" ng:click="ord2 = '-type'">Type<img src="images/arrow-down.png"/></span> 
+                </th>
+                <th class="pattern"> 
+	              <span ng:show="ord2 != '-annotatedPattern' &amp;&amp; ord2 != 'annotatedPattern' " ng:click="ord2 = 'annotatedPattern'">Pattern<img src="images/arrow-blank.png"/></span> 
+	              <span class="ordered" ng:show="ord2 == '-annotatedPattern'" ng:click="ord2 = 'annotatedPattern'">Pattern<img src="images/arrow-up.png"/></span> 
+	              <span class="ordered" ng:show="ord2 == 'annotatedPattern'" ng:click="ord2 = '-annotatedPattern'">Pattern<img src="images/arrow-down.png"/></span> 
+	            </th>
+                <th class="usages last"> 
+                  <span ng:show="ord2 != '-usages.$size()' &amp;&amp; ord2 != 'usages.$size()' " ng:click="ord2 = 'usages.$size()'">Usages<img src="images/arrow-blank.png"/></span> 
+                  <span class="ordered" ng:show="ord2 == '-usages.$size()'" ng:click="ord2 = 'usages.$size()'">Usages<img src="images/arrow-up.png"/></span> 
+                  <span class="ordered" ng:show="ord2 == 'usages.$size()'" ng:click="ord2 = '-usages.$size()'">Usages<img src="images/arrow-down.png"/></span> </th>
               </tr>
               <tr class="filters" ng:init="stepSearch.type = ''">
                 <th> 
