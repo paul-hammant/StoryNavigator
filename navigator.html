@@ -18,6 +18,7 @@
     function MyController($resource) {
         this.Story = $resource("xref.json");
         this.data = this.Story.get({});
+        this.c = {};
     }
     MyController.$inject = ["$resource"];
     MyController.prototype = {
@@ -70,13 +71,6 @@
             $(thisIdObj).show();
         });
         $("#tabs").tabs();
-        $(".show_hide").click(function() {
-        	if ($(this).is(":checked")) {
-        	   $("." + this.value).show();
-            } else {
-               $("." + this.value).hide();
-            }
-        });
     });
 </script>
 
@@ -109,59 +103,59 @@
 	                            <div id="view-selector">
 								<label>View:</label>
 								<ul>
-									<li><input type="checkbox" class="show_hide" value="status" checked="true"> Status</input></li>
-									<li><input type="checkbox" class="show_hide" value="path" checked="true"> Path</input></li>
-									<li><input type="checkbox" class="show_hide" value="description" checked="true"> Description</input></li>
-									<li><input type="checkbox" class="show_hide" value="meta" checked="true"> Meta</input></li>
-									<li><input type="checkbox" class="show_hide" value="narrative" checked="true"> Narrative</input></li>
-									<li><input type="checkbox" class="show_hide" value="started" checked="true"> Started </input></li>
-									<li><input type="checkbox" class="show_hide" value="duration" checked="true"> Duration </input></li>
+									<li><input type="checkbox" class="show_hide" name="c.status" checked="true"> Status</input></li>
+									<li><input type="checkbox" class="show_hide" name="c.path" checked="true"> Path</input></li>
+									<li><input type="checkbox" class="show_hide" name="c.description" checked="true"> Description</input></li>
+									<li><input type="checkbox" class="show_hide" name="c.meta" checked="true"> Meta</input></li>
+									<li><input type="checkbox" class="show_hide" name="c.narrative" checked="true"> Narrative</input></li>
+									<li><input type="checkbox" class="show_hide" name="c.started" checked="true"> Started </input></li>
+									<li><input type="checkbox" class="show_hide" name="c.duration" checked="true"> Duration </input></li>
 								</ul>
 							</div>
                             </th>
                         </tr>
                         <tr class="columnTitles">
-                            <th class="status first">
+                            <th ng:show="c.status" class="status first">
                                 <a href id="status-asc" class="ascending" ng:click="predicate = 'passed'">Status</a>
                                 <a href id="status-des" class="descending" ng:click="predicate = '-passed'">Status</a>
                             </th>
-                            <th class="path">
+                            <th ng:show="c.path" class="path">
                                 <a href id="path-asc" class="ascending" ng:click="predicate = 'path'">Path</a>
                                 <a href id="path-des" class="descending" ng:click="predicate = '-path'">Path</a>
                             </th>
-                            <th class="description">
+                            <th ng:show="c.description" class="description">
                                 <a href id="description-asc" class="ascending" ng:click="predicate = 'description'">Description</a>
                                 <a href id="description-des" class="descending" ng:click="predicate = '-description'">Description</a>
                             </th>
-                            <th class="meta">
+                            <th ng:show="c.meta" class="meta">
                                 <a href id="meta-asc" class="ascending" ng:click="predicate = 'meta'">Meta</a>
                                 <a href id="meta-des" class="descending" ng:click="predicate = '-meta'">Meta</a>
                             </th>
-                            <th class="narrative">
+                            <th ng:show="c.narrative" class="narrative">
                                 <a href id="narrative-asc" class="ascending" ng:click="predicate = 'narrative'">Narrative</a>
                                 <a href id="narrative-des" class="descending" ng:click="predicate = '-narrative'">Narrative</a>
                             </th>
-                            <th class="started">
+                            <th ng:show="c.started" class="started">
                                 <a href id="started-asc" class="ascending" ng:click="predicate = 'started'">Started</a>
                                 <a href id="started-des" class="descending" ng:click="predicate = '-started'">Started</a>
                             </th>
-                            <th class="duration last">
+                            <th ng:show="c.duration" class="duration last">
                                 <a href id="duration-asc" class="ascending" ng:click="predicate = 'duration'">Duration</a>
                                 <a href id="duration-des" class="descending" ng:click="predicate = '-duration'">Duration</a>
                             </th>
                         </tr>
                         <tr>
-                            <th class="status filterLabel">Filter</th>
-                            <th class="path"><input name="search.path" class="filterInput"/></th>
-                            <th class="description"><input name="search.description" class="filterInput"/></th>
-                            <th class="meta">
+                            <th ng:show="c.status" class="status filterLabel">Filter</th>
+                            <th ng:show="c.path" class="path"><input name="search.path" class="filterInput"/></th>
+                            <th ng:show="c.description" class="description"><input name="search.description" class="filterInput"/></th>
+                            <th ng:show="c.meta" class="meta">
                                 <select name="search.meta" class="filterInput">
                                     <option value="=" selected="selected">- All -</option>
                                     <option ng:repeat="permutation in data.xref.meta">{{permutation}}</option>
                                 </select></th>
-                            <th class="narrative"><input name="search.narrative" class="filterInput"/></th>
-                            <th class="started"/>
-                            <th class="duration total">{{data.xref.stories.$filter(search).$sum('duration') /1000 | number:0}} secs</th>
+                            <th ng:show="c.narrative" class="narrative"><input name="search.narrative" class="filterInput"/></th>
+                            <th ng:show="c.started" class="started"/>
+                            <th ng:show="c.duration" class="duration total">{{data.xref.stories.$filter(search).$sum('duration') /1000 | number:0}} secs</th>
                         </tr>
                         </thead>
                         <tfoot>
@@ -172,17 +166,17 @@
                         <tbody>
                         <tr ng:repeat="story in data.xref.stories.$filter(search).$orderBy(predicate)"
                             ng:click="showResults(story)" title="Click to view the story details">
-                            <td class="status"><img src="images/passed-{{story.passed}}.png"
+                            <td ng:show="c.status" class="status"><img src="images/passed-{{story.passed}}.png"
                                                     alt="Story Passed == {{story.passed}}"/></td>
-                            <td class="path">{{story.path}}</td>
-                            <td class="description">{{story.description}}</td>
-                            <td class="meta">{{story.meta}}</td>
-                            <td class="narrative">{{story.narrative | newlines | html}}</td>
-                            <td class="started">
+                            <td ng:show="c.path" class="path">{{story.path}}</td>
+                            <td ng:show="c.description" class="description">{{story.description}}</td>
+                            <td ng:show="c.meta" class="meta">{{story.meta}}</td>
+                            <td ng:show="c.narrative" class="narrative">{{story.narrative | newlines | html}}</td>
+                            <td ng:show="c.started" class="started">
                                 <div>{{story.started | date:'MM-dd-yyyy'}}</div>
                                 <div>{{story.started | date:'HH:mm:ss'}}</div>
                             </td>
-                            <td class="duration">{{story.duration / 1000 | number:1}}</td>
+                            <td ng:show="c.duration" class="duration">{{story.duration / 1000 | number:1}}</td>
                         </tr>
                         </tbody>
                     </table>
