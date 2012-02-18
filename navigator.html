@@ -19,10 +19,9 @@
         this.data = $resource("xref.json").get({});
         this.c = {};
         this.ord = 'passed';
-    }
-    MyController.$inject = ["$resource"];
-    MyController.prototype = {
-        showResults: function(story) {
+
+        // show a single story.
+        this.showResults = function(story) {
             jQuery.FrameDialog.create({
                 width: 1000,
                 height: 600,
@@ -35,25 +34,32 @@
                     }
                 ]
             })
-        },
+        };
 
-        showUsages: function(match) {
+        // show a usages of a step
+        this.showUsages = function(match) {
 	
 	        // pending Misko's fix for JQuery and Angular in 0.9.13 ?
 	
             //this.s2.type = match.type;
             //this.s2.annotatedPattern = match.annotatedPattern;
             //$( "#usagesDialog" ).dialog();
-        },
+        };
 
-        openEditTab: function(story) {
+        // edit the story
+        this.openEditTab = function(story) {
             alert("TODO");
-        }
-    };
+        };
+
+    }
+    MyController.$inject = ["$resource"];
+
+    // Sometimes story next has newline chars in it.
     angular.filter('newlines', function(text) {
         return text.replace(/\n/g, '<br/>');
     });
 
+    // One tab for Stories, one for Steps.
     $(document).ready(function() {
         $("#tabs").tabs();
     });
@@ -101,37 +107,37 @@
                         </tr>
                         <tr class="columnTitles">
                             <th style="white-space: nowrap;" ng:show="c.status" class="status first">
-	                            <span ng:show="ord != '-passed' &amp;&amp; ord != 'passed' " ng:click="ord = 'passed'">Status</span>
+	                            <span ng:show="ord != '-passed' &amp;&amp; ord != 'passed' " ng:click="ord = 'passed'">Status<img src="images/orange-arrow-blank.png"/></span>
                                 <span ng:show="ord == '-passed'" ng:click="ord = 'passed'">Status<img src="images/orange-arrow-up.png"/></span>
                                 <span ng:show="ord == 'passed'" ng:click="ord = '-passed'">Status<img src="images/orange-arrow-down.png"/></span>
                             </th>
                             <th style="white-space: nowrap;" ng:show="c.path" class="path">
-	                            <span ng:show="ord != '-path' &amp;&amp; ord != 'path' " ng:click="ord = 'path'">Path</span>
+	                            <span ng:show="ord != '-path' &amp;&amp; ord != 'path' " ng:click="ord = 'path'">Path<img src="images/orange-arrow-blank.png"/></span>
                                 <span ng:show="ord == '-path'" ng:click="ord = 'path'">Path<img src="images/orange-arrow-up.png"/></span>
                                 <span ng:show="ord == 'path'" ng:click="ord = '-path'">Path<img src="images/orange-arrow-down.png"/></span>
                             </th>
 							<th style="white-space: nowrap;" ng:show="c.description" class="description">
-	                            <span ng:show="ord != '-description' &amp;&amp; ord != 'description' " ng:click="ord = 'description'">Description</span>
+	                            <span ng:show="ord != '-description' &amp;&amp; ord != 'description' " ng:click="ord = 'description'">Description<img src="images/orange-arrow-blank.png"/></span>
 							    <span ng:show="ord == '-description'" ng:click="ord = 'description'">Description<img src="images/orange-arrow-up.png"/></span>
 							    <span ng:show="ord == 'description'" ng:click="ord = '-description'">Description<img src="images/orange-arrow-down.png"/></span>
 							</th>
 							<th style="white-space: nowrap;" ng:show="c.meta" class="meta">
-	                            <span ng:show="ord != '-meta' &amp;&amp; ord != 'meta' " ng:click="ord = 'meta'">Meta</span>
+	                            <span ng:show="ord != '-meta' &amp;&amp; ord != 'meta' " ng:click="ord = 'meta'">Meta<img src="images/orange-arrow-blank.png"/></span>
 							    <span ng:show="ord == '-meta'" ng:click="ord = 'meta'">Meta<img src="images/orange-arrow-up.png"/></span>
 							    <span ng:show="ord == 'meta'" ng:click="ord = '-meta'">Meta<img src="images/orange-arrow-down.png"/></span>
 							</th>
 							<th style="white-space: nowrap;" ng:show="c.narrative" class="narrative">
-	                            <span ng:show="ord != '-narrative' &amp;&amp; ord != 'narrative' " ng:click="ord = 'narrative'">Narrative</span>
+	                            <span ng:show="ord != '-narrative' &amp;&amp; ord != 'narrative' " ng:click="ord = 'narrative'">Narrative<img src="images/orange-arrow-blank.png"/></span>
 							    <span ng:show="ord == '-narrative'" ng:click="ord = 'narrative'">narrative<img src="images/orange-arrow-up.png"/></span>
 							    <span ng:show="ord == 'narrative'" ng:click="ord = '-narrative'">narrative<img src="images/orange-arrow-down.png"/></span>
 							</th>
 							<th style="white-space: nowrap;" ng:show="c.started" class="started">
-	                            <span ng:show="ord != '-started' &amp;&amp; ord != 'started' " ng:click="ord = 'started'">Started</span>
+	                            <span ng:show="ord != '-started' &amp;&amp; ord != 'started' " ng:click="ord = 'started'">Started<img src="images/orange-arrow-blank.png"/></span>
 							    <span ng:show="ord == '-started'" ng:click="ord = 'started'">Started<img src="images/orange-arrow-up.png"/></span>
 							    <span ng:show="ord == 'started'" ng:click="ord = '-started'">Started<img src="images/orange-arrow-down.png"/></span>
 							</th>
 							<th style="white-space: nowrap;" ng:show="c.duration" class="duration">
-	                            <span ng:show="ord != '-duration' &amp;&amp; ord != 'duration' " ng:click="ord = 'duration'">Duration</span>
+	                            <span ng:show="ord != '-duration' &amp;&amp; ord != 'duration' " ng:click="ord = 'duration'">Duration<img src="images/orange-arrow-blank.png"/></span>
 							    <span ng:show="ord == '-duration'" ng:click="ord = 'duration'">Duration<img src="images/orange-arrow-up.png"/></span>
 							    <span ng:show="ord == 'duration'" ng:click="ord = '-duration'">Duration<img src="images/orange-arrow-down.png"/></span>
 							</th>
@@ -150,11 +156,6 @@
                             <th ng:show="c.duration" class="duration total">{{data.xref.stories.$filter(search).$sum('duration') /1000 | number:0}} secs</th>
                         </tr>
                         </thead>
-                        <tfoot>
-                        <tr>
-                            <td colspan="7">&nbsp;</td>
-                        </tr>
-                        </tfoot>
                         <tbody>
                         <tr ng:repeat="story in data.xref.stories.$filter(search).$orderBy(ord)"
                             ng:click="showResults(story)" title="Click to view the story details">
