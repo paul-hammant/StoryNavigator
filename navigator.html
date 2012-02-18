@@ -19,6 +19,7 @@
         this.data = $resource("xref.json").get({});
         this.c = {};
         this.ord = 'passed';
+        this.ord2 = 'type';
 
         // show a single story.
         this.showResults = function(story) {
@@ -169,19 +170,21 @@
                             <th colspan="3" class="section">Steps</th>
                         </tr>
                         <tr class="columnTitles">
-                            <th class="type first">
-                                <a href id="type-asc" class="ascending" ng:click="stepPredicate = 'type'">Type</a>
-                                <a href id="type-des" class="descending" ng:click="stepPredicate = '-type'">Type</a>
+	                        <th class="type first">
+	                            <span ng:show="ord2 != '-type' &amp;&amp; ord2 != 'type' " ng:click="ord2 = 'type'">Type<img src="images/arrow-blank.png"/></span>
+                                <span ng:show="ord2 == '-type'" ng:click="ord2 = 'type'">Type<img src="images/arrow-up.png"/></span>
+                                <span ng:show="ord2 == 'type'" ng:click="ord2 = '-type'">Type<img src="images/arrow-down.png"/></span>
                             </th>
+    
                             <th class="pattern">
-                                <a href id="pattern-asc" class="ascending"
-                                   ng:click="stepPredicate = 'annotatedPattern'">Pattern</a>
-                                <a href id="pattern-des" class="descending"
-                                   ng:click="stepPredicate = '-annotatedPattern'">Pattern</a>
+	                            <span ng:show="ord2 != '-annotatedPattern' &amp;&amp; ord2 != 'annotatedPattern' " ng:click="ord2 = 'annotatedPattern'">Pattern<img src="images/arrow-blank.png"/></span>
+                                <span ng:show="ord2 == '-annotatedPattern'" ng:click="ord2 = 'annotatedPattern'">Pattern<img src="images/arrow-up.png"/></span>
+                                <span ng:show="ord2 == 'annotatedPattern'" ng:click="ord2 = '-annotatedPattern'">Pattern<img src="images/arrow-down.png"/></span>
                             </th>
                             <th class="usages last">
-                                <a href id="usages-asc" class="ascending" ng:click="stepPredicate = 'usages.$size()'">Usages</a>
-                                <a href id="usages-des" class="descending" ng:click="stepPredicate = '-usages.$size()'">Usages</a>
+	                            <span ng:show="ord2 != '-usages.$size()' &amp;&amp; ord2 != 'usages.$size()' " ng:click="ord2 = 'usages.$size()'">Usages<img src="images/arrow-blank.png"/></span>
+                                <span ng:show="ord2 == '-usages.$size()'" ng:click="ord2 = 'usages.$size()'">Usages<img src="images/arrow-up.png"/></span>
+                                <span ng:show="ord2 == 'usages.$size()'" ng:click="ord2 = '-usages.$size()'">Usages<img src="images/arrow-down.png"/></span>
                             </th>
                         </tr>
                         <tr class="filters">
@@ -198,7 +201,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng:repeat="match in data.xref.stepMatches.$filter(stepSearch).$orderBy(stepPredicate)">
+                        <tr ng:repeat="match in data.xref.stepMatches.$filter(stepSearch).$orderBy(ord2)">
                             <td class="type">{{match.type}}</td>
                             <td class="pattern">{{match.annotatedPattern}}</td>
                             <td class="size">{{match.usages.$size()}}</td>
