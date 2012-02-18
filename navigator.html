@@ -1,5 +1,43 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- 
+
+JBehave Story Navigator using Angular.js.
+
+If learning Angular by reading this source file, take note of these:
+
+  1) There's a static JSON file adjacent to this index.html file .... xref.json (edit the URL bar to see it)
+
+  2) Angular bits and pieces used:
+
+     ng:show - an element is shown if the expression is true, hidden if false.
+     ng:click  - almost anything can be clicked on, and cause an action (setting something in the model most likely)
+     ng:repeat  - looping through repeating elements of a model 
+     ng:init  - setting initial values in the model
+
+     ng:show is quite a trick - some elements appear to share space on the page or be redundant .. but 
+     only one is shown at a time by virture of locally opposite ng:show expressions.
+
+  3) the ng:repeat iterations through the array, are subject to ordering and subsetting. See:
+    
+     .$filter  -  subsetting 
+     .$orderBy  - reordering the array for the purposes of display.
+
+  4) We're using some aggregate functions on lists. Principally:
+
+     $size()  - gives us a number of matching rows
+     $sum('duration')  - the sum of all duration for all the rows
+
+  5) Some filters
+
+   | date  - outputs a date format
+   | number  - outputs a number format.
+
+  General Resources: http://docs.angularjs.org/#!/api/
+
+-->
+
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ng="http://angularjs.org" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
