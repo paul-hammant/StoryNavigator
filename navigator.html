@@ -212,8 +212,10 @@ If learning Angular by reading this source file, take note of these:
             <tbody>
               <tr ng:repeat="story in data.xref.stories.$filter(search).$orderBy(ord)"
                             ng:click="showResults(story)" title="Click to view the story details">
-                <td ng:show="c.status" class="status"><img src="images/passed-{{story.passed}}.png"
-                                                    alt="Story Passed == {{story.passed}}"/></td>
+                <td ng:show="c.status" class="status">
+					<img src="images/passed-true.png" alt="Story Passed" ng:show="story.passed"/>
+					<img src="images/passed-false.png" alt="Story Failed" ng:show="story.passed == false"/>
+			    </td>
                 <td ng:show="c.path" class="path">{{story.path}}</td>
                 <td ng:show="c.description" class="description">{{story.description}}</td>
                 <td ng:show="c.meta" class="meta">{{story.meta}}</td>
@@ -281,5 +283,6 @@ If learning Angular by reading this source file, take note of these:
     </div>
   </div>
 </div>
+
 </body>
 </html>
