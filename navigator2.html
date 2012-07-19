@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- 
+
+JBehave Story Navigator using Angular.js.
+
+If learning Angular by reading this source file, take note of these:
+
+  1) There's a static JSON file adjacent to this index.html file .... xref.json (edit the URL bar to see it)
+
+  2) Angular bits and pieces used:
+
+     ng:show - an element is shown if the expression is true, hidden if false.
+     ng:click  - almost anything can be clicked on, and cause an action (setting something in the model most likely)
+     ng:repeat  - looping through repeating elements of a model 
+     ng:init  - setting initial values in the model
+
+     ng:show is quite a trick - some elements appear to share space on the page or be redundant .. but 
+     only one is shown at a time by virtue of locally opposite ng:show expressions.
+
+  3) the ng:repeat iterations through the array, are subject to ordering and sub-setting. See:
+    
+     .$filter(var)  -  sub-setting 
+     .$orderBy(var)  - reordering the array for the purposes of display.
+
+  4) We're using some aggregate functions on lists. Principally:
+
+     $size()  - gives us a number of matching rows
+     $sum(var)  - the sum of all duration for all the rows
+
+  5) Some filters
+
+   | date  - outputs a date format
+   | number  - outputs a number format.
+
+  
+  General Resources: 
+ 
+      http://docs.angularjs.org/#!/api/   - Angular's API docs
+      https://github.com/paul-hammant/StoryNavigator/blob/gh-pages/navigator.html   - this file in-situ on Github (colored - yay!)
+      http://paulhammant.com/   - author's blog.
+
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ng="http://angularjs.org" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<script type="text/javascript" ng:autobind src="js/angular-0.9.19.min.js"></script>
+<script type="text/javascript" src="js/jquery-framedialog-1.1.2.js"></script>
+<link rel="stylesheet" type="text/css" href="style/navigator.css"/>
+<link rel="stylesheet" type="text/css" href="style/jquery-ui.css"/>
+<title>Story Navigator</title>
+</head>
+<body ng:controller="MyController">
+<script type="text/javascript">
+    function MyController($resource) {
+        this.data = $resource("xref.json").get({});
+        this.c = {};
+        this.ord = 'passed';
+        this.ord2 = 'type';
+
+        // show a single story.
+        this.showResults = function(story) {
+            jQuery.FrameDialog.create({
+                width: 1000,
+                height: 600,
+                closeText: 'foo',
+                url: story.html,
+                title: 'Results For ' + story.path,
+                closeOnEscape: true,
+                buttons: [
+                    {
+                    }
+                ]
+            })
+        };
+    }
+
+    MyController.$inject = ["$resource"];
+
+    // Sometimes story next has newline chars in it.
+    angular.filter('newlines', function(text) {
+        return text.replace(/\n/g, '<br/>');
+    });
+
+</script>
+<div id="page-wrap">
+  <div id="inside">
+    <div id="header"> <a href="http://www.jbehave.org"><img src="images/jbehave-logo.png" alt="header"/></a> </div>
+    <div id="main-content">
+      <div id="tabs">
+        
+        <!-- The Step-Match List Tab -->
+        
+        <div id="tabs-2">
+          <table cellspacing="0" cellpadding="0">
+            <thead>
+              <tr>
+                <th colspan="4" class="section">Steps</th>
+              </tr>
+              <tr class="columnTitles">
+                <th class="type first"> 
+                  <span ng:show="ord2 != '-type' &amp;&amp; ord2 != 'type' " ng:click="ord2 = 'type'">Type<img src="images/arrow-blank.png"/></span> 
+                  <span class="ordered" ng:show="ord2 == '-type'" ng:click="ord2 = 'type'">Type<img src="images/arrow-up.png"/></span> 
+                  <span class="ordered" ng:show="ord2 == 'type'" ng:click="ord2 = '-type'">Type<img src="images/arrow-down.png"/></span> 
+                </th>
+                <th class="pattern"> 
+	              <span ng:show="ord2 != '-annotatedPattern' &amp;&amp; ord2 != 'annotatedPattern' " ng:click="ord2 = 'annotatedPattern'">Pattern<img src="images/arrow-blank.png"/></span> 
+	              <span class="ordered" ng:show="ord2 == '-annotatedPattern'" ng:click="ord2 = 'annotatedPattern'">Pattern<img src="images/arrow-up.png"/></span> 
+	              <span class="ordered" ng:show="ord2 == 'annotatedPattern'" ng:click="ord2 = '-annotatedPattern'">Pattern<img src="images/arrow-down.png"/></span> 
+	            </th>
+                <th class="usages"> 
+                  <span ng:show="ord2 != '-usages.$size()' &amp;&amp; ord2 != 'usages.$size()' " ng:click="ord2 = 'usages.$size()'">Usages<img src="images/arrow-blank.png"/></span> 
+                  <span class="ordered" ng:show="ord2 == '-usages.$size()'" ng:click="ord2 = 'usages.$size()'">Usages<img src="images/arrow-up.png"/></span> 
+                  <span class="ordered" ng:show="ord2 == 'usages.$size()'" ng:click="ord2 = '-usages.$size()'">Usages<img src="images/arrow-down.png"/></span> </th>
+                <th class="usages last"> 
+                    Detail of Usages 
+				</th>  
+              </tr>
+              <tr class="filters" ng:init="stepSearch.type = ''">
+                <th> 
+                  <select name="stepSearch.type" class="filterInput">
+                    <option value ="" selected>- All -</option>
+                    <option>Given</option>
+                    <option>When</option>
+                    <option>Then</option>
+                  </select>
+                </th>
+                <th><input name="stepSearch.annotatedPattern" class="filterInput"/></th>
+                <th>&nbsp;</th>
+				<th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng:repeat="match in data.xref.stepMatches.$filter(stepSearch).$orderBy(ord2)">
+                <td class="type">{{match.type}}</td>
+                <td class="pattern">{{match.annotatedPattern}}</td>
+                <td class="size">{{match.usages.$size()}}</td>
+				<td>
+					<table>
+                        <tr>
+							<th>Story</td>
+							<th>Scenario</td>	
+							<th>Step</td>															
+                        </tr>
+                        <tr ng:repeat="use in match.usages">
+							<td>{{use.story}}</td>
+							<td>{{use.scenario}}</td>
+							<td>{{use.step}}</td>
+                        </tr>
+				    </table>
+				</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
