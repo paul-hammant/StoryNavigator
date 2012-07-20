@@ -146,7 +146,7 @@ tbody {
 	background: #333;
 }
 
-tbody td {
+tbody td.main {
 	border-top:1px solid #fc0;
 	color: #fff;
 	font: 1.1em  Arial, Tahoma, sans-serif;
