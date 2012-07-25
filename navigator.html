@@ -57,8 +57,21 @@ If learning Angular by reading this source file, take note of these:
 <body ng:controller="MyController">
 <script type="text/javascript">
     function MyController($resource) {
+		
+		// the main story + steps resource, loaded asynchronously
         this.data = $resource("xref.json").get({});
+
+        // which tab is active? story or steps. One constant ...
+		this.cssSelectedTab = 'ui-tabs-selected ui-state-active';
+		// .. and three variables control that ...
+		this.tab = 1;
+		this.cssOne = this.cssSelectedTab;
+		this.cssTwo = '';
+
+        // filter criteria (none by default)
         this.c = {};
+
+        // column ordering
         this.ord = 'passed';
         this.ord2 = 'type';
 
@@ -86,23 +99,19 @@ If learning Angular by reading this source file, take note of these:
         return text.replace(/\n/g, '<br/>');
     });
 
-    // One tab for Stories, one for Steps.
-    $(document).ready(function() {
-        $("#tabs").tabs();
-    });
 </script>
 <div id="page-wrap">
   <div id="inside">
     <div id="header"> <a href="http://www.jbehave.org"><img src="images/jbehave-logo.png" alt="header"/></a> </div>
     <div id="main-content">
-      <div id="tabs">
-        <ul>
-          <li><a href="#tabs-1">Stories ({{data.xref.stories.$size()}})</a></li>
-          <li><a href="#tabs-2">Steps ({{data.xref.stepMatches.$size()}})</a></li>
+      <div class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+          <li class="ui-state-default ui-corner-top" ng:class="cssOne"><a ng:click="tab = 1; cssOne=cssSelectedTab; cssTwo=''">Stories ({{data.xref.stories.$size()}})</a></li>
+          <li class="ui-state-default ui-corner-top" ng:class="cssTwo"><a ng:click="tab = 2; cssOne=''; cssTwo=cssSelectedTab">Steps ({{data.xref.stepMatches.$size()}})</a></li>
         </ul>
         
         <!-- The Story List Tab -->
-        <div id="tabs-1"> <span></span>
+        <div ng:show="tab == 1"> 
           <table summary="Navigator" cellspacing="0" cellpadding="0">
             <thead>
               <tr>
@@ -230,7 +239,7 @@ If learning Angular by reading this source file, take note of these:
         
         <!-- The Step-Match List Tab -->
         
-        <div id="tabs-2">
+        <div ng:show="tab == 2">
           <table cellspacing="0" cellpadding="0">
             <thead>
               <tr>
