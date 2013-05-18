@@ -5,29 +5,36 @@
 
 JBehave Story Navigator using Angular.js
 
-If learning Angular by reading this source file, take note of these:
+If you are learning Angular by reading this source file, take note of these:
+
+  0) Note this is an older version of Angular 0.9.x. Some features it had have been deleted.
 
   1) There's a static JSON file adjacent to this index.html file .... xref.json (edit the URL bar to see it)
 
   2) Angular bits and pieces used:
 
      ng:show - an element is shown if the expression is true, hidden if false.
-     ng:click  - almost anything can be clicked on, and cause an action (setting something in the model most likely)
-     ng:repeat  - looping through repeating elements of a model 
-     ng:init  - setting initial values in the model
+     ng:click  - almost anything can be clicked on, and cause an action (setting something in the model most likely).
+     ng:repeat  - looping through repeating elements of a model.
+     ng:init  - setting initial values in the model.
+     ng:style  - the overlay panel (per story) appears and disappears in part because of use of this.
 
-     ng:show is quite a trick - some elements appear to share space on the page or be redundant .. but 
+     ng:show participates in a display trick - some elements appear to share space on the page or be redundant .. but
      only one is shown at a time by virtue of locally opposite ng:show expressions.
+
+        -  Go take a look at http://paul-hammant-fork.github.io/StoryNavigator/navigator.html to it's effect.
 
   3) the ng:repeat iterations through the array, are subject to ordering and sub-setting. See:
     
-     .$filter(var)  -  sub-setting 
-     .$orderBy(var)  - reordering the array for the purposes of display.
+     .$filter(criteria)  -  sub-setting
+     .$orderBy(column)  - reordering the array for the purposes of display.
 
   4) We're using some aggregate functions on lists. Principally:
 
      $size()  - gives us a number of matching rows
-     $sum(var)  - the sum of all duration for all the rows
+     $sum(expression)  - the sum of all duration for all the rows
+
+        - these two features are missing for Angular from 1.x onwards.
 
   5) Some filters
 
@@ -37,9 +44,9 @@ If learning Angular by reading this source file, take note of these:
   
   General Resources: 
  
-      http://docs.angularjs.org/#!/api/   - Angular's API docs
+      http://docs.angularjs.org/#!/api/  - Angular's API docs
       https://github.com/paul-hammant/StoryNavigator/blob/gh-pages/navigator.html   - this file in-situ on Github (colored - yay!)
-      http://paulhammant.com/   - author's blog.
+      http://paulhammant.com/  - author's blog.
 
 -->
 
