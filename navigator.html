@@ -69,8 +69,6 @@ If learning Angular by reading this source file, take note of these:
         // Steps Tab's programatically added CSS class
         this.cssTwo = '';
 
-        // overlay closed by default
-        this.overlayStyle = {};
         // overlay open by assignment
         this.showOverlayStyle = {
             display: "block",
@@ -82,6 +80,12 @@ If learning Angular by reading this source file, take note of these:
             top: "50px",
             left: "151px"
         };
+        // overlay closed by assignment
+        this.hideOverlayStyle = {
+            display: "none"
+        };
+        // overlay closed by default
+        this.overlayStyle = this.hideOverlayStyle;
 
         // columns selected/deselected
         this.c = {};
@@ -373,7 +377,7 @@ If learning Angular by reading this source file, take note of these:
      ng:style="overlayStyle">
     <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
         <span class="ui-dialog-title">{{showStoryTitle}}</span>
-        <a role="button" class="ui-dialog-titlebar-close ui-corner-all" ng:click="overlayStyle = ''">
+        <a role="button" class="ui-dialog-titlebar-close ui-corner-all" ng:click="overlayStyle = hideOverlayStyle">
             <span class="ui-icon ui-icon-closethick">foo</span>
         </a>
     </div>
