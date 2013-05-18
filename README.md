@@ -9,7 +9,8 @@ open xref.json to see the data in question
 # Running this without cloning it
 
 To see a live app, visit: [http://paul-hammant.github.com/StoryNavigator](http://paul-hammant.github.com/StoryNavigator)
+Contrast that to  [http://paul-hammant-fork.github.com/StoryNavigator](http://paul-hammant.github.com/StoryNavigator) which is the same, but has the AngularJs import line commented out.
 
-# Collaboration
+# How the app works?
 
-We're going to do little and often pushes to a trunk model here folks.  We don't have to go fork/merge crazy if we're all committers.
+Look inside the source for navigator.html to see plenty of notes towards understanding the implementation.
