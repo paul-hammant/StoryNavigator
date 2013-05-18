@@ -69,6 +69,20 @@ If learning Angular by reading this source file, take note of these:
         // Steps Tab's programatically added CSS class
         this.cssTwo = '';
 
+        // overlay closed by default
+        this.overlayStyle = {};
+        // overlay open by assignment
+        this.showOverlayStyle = {
+            display: "block",
+            zIndex: "1002",
+            outline: "0px none",
+            position:"absolute",
+            height: "643.4px",
+            width: "1116.4px",
+            top: "50px",
+            left: "151px"
+        };
+
         // columns selected/deselected
         this.c = {};
 
@@ -84,6 +98,7 @@ If learning Angular by reading this source file, take note of these:
         this.showResults = function (story) {
             self.showStoryTitle = 'Results For ' + story.path;
             self.showStoryUrl = story.html;
+            self.overlayStyle = self.showOverlayStyle;
         };
     }
 
@@ -353,12 +368,12 @@ If learning Angular by reading this source file, take note of these:
 </div>
 </div>
 <!-- this copied from a JQuery-overlay UI control -->
-<div ng:show="showStoryUrl != ''" role="dialog" tabindex="-1"
+<div role="dialog" tabindex="-1"
      class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable"
-     style="display: block; z-index: 1002; outline: 0px none; position: absolute; height: 643.4px; width: 1116.4px; top: 50px; left: 151px;">
+     ng:style="overlayStyle">
     <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
         <span class="ui-dialog-title">{{showStoryTitle}}</span>
-        <a role="button" class="ui-dialog-titlebar-close ui-corner-all" ng:click="showStoryUrl = ''">
+        <a role="button" class="ui-dialog-titlebar-close ui-corner-all" ng:click="overlayStyle = ''">
             <span class="ui-icon ui-icon-closethick">foo</span>
         </a>
     </div>
