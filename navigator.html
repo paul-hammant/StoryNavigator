@@ -67,47 +67,53 @@ If you are learning Angular by reading this source file, take note of these:
         // the main story + steps resource, loaded asynchronously
         this.data = $resource("xref.json").get({});
 
-        // which tab is active? story or steps. One constant ...
-        this.cssSelectedTab = 'ui-tabs-selected ui-state-active';
-        // .. and three variables control that ...
-        this.tab = 1;
-        // Story Tab's programatically added CSS class
-        this.cssOne = this.cssSelectedTab;
-        // Steps Tab's programatically added CSS class
-        this.cssTwo = '';
-
-        // overlay open by assignment
-        this.showOverlayStyle = {
-            display: "block",
-            zIndex: "1002",
-            outline: "0px none",
-            position:"absolute",
-            height: "643.4px",
-            width: "1116.4px",
-            top: "50px",
-            left: "151px"
+        // none of these ever change
+        this.constants = {
+            // which tab is active? story or steps. One constant ...
+            cssSelectedTab: 'ui-tabs-selected ui-state-active',
+            // overlay open by assignment
+            showOverlayStyle: {
+                display: "block",
+                zIndex: "1002",
+                outline: "0px none",
+                position:"absolute",
+                height: "643.4px",
+                width: "1116.4px",
+                top: "50px",
+                left: "151px"
+            },
+            // overlay closed by assignment
+            hideOverlayStyle: {
+                display: "none"
+            }
         };
-        // overlay closed by assignment
-        this.hideOverlayStyle = {
-            display: "none"
+        
+        // these change, but only to support view state.
+        this.ui = {
+            // which tab are we on?
+            tab: 1,
+            // Story Tab's programatically added CSS class
+            cssOne: this.constants.cssSelectedTab,
+            // Steps Tab's programatically added CSS class
+            cssTwo: "",
+            // overlay closed by default
+            overlayStyle: this.constants.hideOverlayStyle,
+
+            // columns selected/deselected
+            columns: {},
+
+            // column ordering for the stories tab
+            storyOrder: "passed",
+            // column ordering for the steps tab
+            stepsOrder: "type",
+
+            // show a single story.
+            showStory: null
         };
-        // overlay closed by default
-        this.overlayStyle = this.hideOverlayStyle;
-
-        // columns selected/deselected
-        this.c = {};
-
-        // column ordering for the stories tab
-        this.ord = 'passed';
-        // column ordering for the steps tab
-        this.ord2 = 'type';
-
-        // show a single story.
-        this.showStory = null;
 
         this.showResults = function (story) {
-            self.showStory = story;
-            self.overlayStyle = self.showOverlayStyle;
+            self.ui.showStory = story;
+            self.ui.overlayStyle = self.constants.showOverlayStyle;
         };
     }
 
@@ -125,14 +131,14 @@ If you are learning Angular by reading this source file, take note of these:
 <div id="main-content">
 <div class="ui-tabs ui-widget ui-widget-content ui-corner-all">
 <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-    <li class="ui-state-default ui-corner-top" ng:class="cssOne"><a
-            ng:click="tab = 1; cssOne=cssSelectedTab; cssTwo=''">Stories ({{data.xref.stories.$size()}})</a></li>
-    <li class="ui-state-default ui-corner-top" ng:class="cssTwo"><a
-            ng:click="tab = 2; cssOne=''; cssTwo=cssSelectedTab">Steps ({{data.xref.stepMatches.$size()}})</a></li>
+    <li class="ui-state-default ui-corner-top" ng:class="ui.cssOne"><a
+            ng:click="ui.tab = 1; ui.cssOne=constants.cssSelectedTab; ui.cssTwo=''">Stories ({{data.xref.stories.$size()}})</a></li>
+    <li class="ui-state-default ui-corner-top" ng:class="ui.cssTwo"><a
+            ng:click="ui.tab = 2; ui.cssOne=''; ui.cssTwo=constants.cssSelectedTab">Steps ({{data.xref.stepMatches.$size()}})</a></li>
 </ul>
 
 <!-- The Story List Tab -->
-<div ng:show="tab == 1">
+<div ng:show="ui.tab == 1">
     <table summary="Navigator" cellspacing="0" cellpadding="0">
         <thead>
         <tr>
@@ -148,37 +154,37 @@ If you are learning Angular by reading this source file, take note of these:
                     <label>View:</label>
                     <ul>
                         <li>
-                            <input type="checkbox" name="c.status" checked="true">
+                            <input type="checkbox" name="ui.columns.status" checked="true">
                             Status
                             </input>
                         </li>
                         <li>
-                            <input type="checkbox" name="c.path" checked="true">
+                            <input type="checkbox" name="ui.columns.path" checked="true">
                             Path
                             </input>
                         </li>
                         <li>
-                            <input type="checkbox" name="c.description" checked="true">
+                            <input type="checkbox" name="ui.columns.description" checked="true">
                             Description
                             </input>
                         </li>
                         <li>
-                            <input type="checkbox" name="c.meta" checked="true">
+                            <input type="checkbox" name="ui.columns.meta" checked="true">
                             Meta
                             </input>
                         </li>
                         <li>
-                            <input type="checkbox" name="c.narrative" checked="true">
+                            <input type="checkbox" name="ui.columns.narrative" checked="true">
                             Narrative
                             </input>
                         </li>
                         <li>
-                            <input type="checkbox" name="c.started" checked="true">
+                            <input type="checkbox" name="ui.columns.started" checked="true">
                             Started
                             </input>
                         </li>
                         <li>
-                            <input type="checkbox" name="c.duration" checked="true">
+                            <input type="checkbox" name="ui.columns.duration" checked="true">
                             Duration
                             </input>
                         </li>
@@ -193,94 +199,94 @@ If you are learning Angular by reading this source file, take note of these:
         -->
 
         <tr class="columnTitles">
-            <th ng:show="c.status" class="status first">
-                <span ng:show="ord != '-passed' &amp;&amp; ord != 'passed' " ng:click="ord = 'passed'">Status<img
+            <th ng:show="ui.columns.status" class="status first">
+                <span ng:show="ui.storyOrder!= '-passed' &amp;&amp; ui.storyOrder!= 'passed' " ng:click="ui.storyOrder= 'passed'">Status<img
                         src="images/arrow-blank.png"/></span>
-                <span class="ordered" ng:show="ord == '-passed'" ng:click="ord = 'passed'">Status<img
+                <span class="ordered" ng:show="ui.storyOrder== '-passed'" ng:click="ui.storyOrder= 'passed'">Status<img
                         src="images/arrow-up.png"/></span>
-                <span class="ordered" ng:show="ord == 'passed'" ng:click="ord = '-passed'">Status<img
+                <span class="ordered" ng:show="ui.storyOrder== 'passed'" ng:click="ui.storyOrder= '-passed'">Status<img
                         src="images/arrow-down.png"/></span>
             </th>
-            <th ng:show="c.path" class="path">
-                <span ng:show="ord != '-path' &amp;&amp; ord != 'path' " ng:click="ord = 'path'">Path<img
+            <th ng:show="ui.columns.path" class="path">
+                <span ng:show="ui.storyOrder!= '-path' &amp;&amp; ui.storyOrder!= 'path' " ng:click="ui.storyOrder= 'path'">Path<img
                         src="images/arrow-blank.png"/></span>
-                <span class="ordered" ng:show="ord == '-path'" ng:click="ord = 'path'">Path<img
+                <span class="ordered" ng:show="ui.storyOrder== '-path'" ng:click="ui.storyOrder= 'path'">Path<img
                         src="images/arrow-up.png"/></span>
-                <span class="ordered" ng:show="ord == 'path'" ng:click="ord = '-path'">Path<img
+                <span class="ordered" ng:show="ui.storyOrder== 'path'" ng:click="ui.storyOrder= '-path'">Path<img
                         src="images/arrow-down.png"/></span>
             </th>
-            <th ng:show="c.description" class="description">
-                <span ng:show="ord != '-description' &amp;&amp; ord != 'description' " ng:click="ord = 'description'">Description<img
+            <th ng:show="ui.columns.description" class="description">
+                <span ng:show="ui.storyOrder!= '-description' &amp;&amp; ui.storyOrder!= 'description' " ng:click="ui.storyOrder= 'description'">Description<img
                         src="images/arrow-blank.png"/></span>
-                <span class="ordered" ng:show="ord == '-description'" ng:click="ord = 'description'">Description<img
+                <span class="ordered" ng:show="ui.storyOrder== '-description'" ng:click="ui.storyOrder= 'description'">Description<img
                         src="images/arrow-up.png"/></span>
-                <span class="ordered" ng:show="ord == 'description'" ng:click="ord = '-description'">Description<img
+                <span class="ordered" ng:show="ui.storyOrder== 'description'" ng:click="ui.storyOrder= '-description'">Description<img
                         src="images/arrow-down.png"/></span
             </th>
-            <th ng:show="c.meta" class="meta">
-                <span ng:show="ord != '-meta' &amp;&amp; ord != 'meta' " ng:click="ord = 'meta'">Meta<img
+            <th ng:show="ui.columns.meta" class="meta">
+                <span ng:show="ui.storyOrder!= '-meta' &amp;&amp; ui.storyOrder!= 'meta' " ng:click="ui.storyOrder= 'meta'">Meta<img
                         src="images/arrow-blank.png"/></span>
-                <span class="ordered" ng:show="ord == '-meta'" ng:click="ord = 'meta'">Meta<img
+                <span class="ordered" ng:show="ui.storyOrder== '-meta'" ng:click="ui.storyOrder= 'meta'">Meta<img
                         src="images/arrow-up.png"/></span>
-                <span class="ordered" ng:show="ord == 'meta'" ng:click="ord = '-meta'">Meta<img
+                <span class="ordered" ng:show="ui.storyOrder== 'meta'" ng:click="ui.storyOrder= '-meta'">Meta<img
                         src="images/arrow-down.png"/></span>
             </th>
-            <th ng:show="c.narrative" class="narrative">
-                <span ng:show="ord != '-narrative' &amp;&amp; ord != 'narrative' " ng:click="ord = 'narrative'">Narrative<img
+            <th ng:show="ui.columns.narrative" class="narrative">
+                <span ng:show="ui.storyOrder!= '-narrative' &amp;&amp; ui.storyOrder!= 'narrative' " ng:click="ui.storyOrder= 'narrative'">Narrative<img
                         src="images/arrow-blank.png"/></span>
-                <span class="ordered" ng:show="ord == '-narrative'" ng:click="ord = 'narrative'">Narrative<img
+                <span class="ordered" ng:show="ui.storyOrder== '-narrative'" ng:click="ui.storyOrder= 'narrative'">Narrative<img
                         src="images/arrow-up.png"/></span>
-                <span class="ordered" ng:show="ord == 'narrative'" ng:click="ord = '-narrative'">Narrative<img
+                <span class="ordered" ng:show="ui.storyOrder== 'narrative'" ng:click="ui.storyOrder= '-narrative'">Narrative<img
                         src="images/arrow-down.png"/></span>
             </th>
-            <th ng:show="c.started" class="started">
-                <span ng:show="ord != '-started' &amp;&amp; ord != 'started' " ng:click="ord = 'started'">Started<img
+            <th ng:show="ui.columns.started" class="started">
+                <span ng:show="ui.storyOrder!= '-started' &amp;&amp; ui.storyOrder!= 'started' " ng:click="ui.storyOrder= 'started'">Started<img
                         src="images/arrow-blank.png"/></span>
-                <span class="ordered" ng:show="ord == '-started'" ng:click="ord = 'started'">Started<img
+                <span class="ordered" ng:show="ui.storyOrder== '-started'" ng:click="ui.storyOrder= 'started'">Started<img
                         src="images/arrow-up.png"/></span>
-                <span class="ordered" ng:show="ord == 'started'" ng:click="ord = '-started'">Started<img
+                <span class="ordered" ng:show="ui.storyOrder== 'started'" ng:click="ui.storyOrder= '-started'">Started<img
                         src="images/arrow-down.png"/></span>
             </th>
-            <th ng:show="c.duration" class="duration">
-                <span ng:show="ord != '-duration' &amp;&amp; ord != 'duration' "
-                      ng:click="ord = 'duration'">Duration<img src="images/arrow-blank.png"/></span>
-                <span class="ordered" ng:show="ord == '-duration'" ng:click="ord = 'duration'">Duration<img
+            <th ng:show="ui.columns.duration" class="duration">
+                <span ng:show="ui.storyOrder!= '-duration' &amp;&amp; ui.storyOrder!= 'duration' "
+                      ng:click="ui.storyOrder= 'duration'">Duration<img src="images/arrow-blank.png"/></span>
+                <span class="ordered" ng:show="ui.storyOrder== '-duration'" ng:click="ui.storyOrder= 'duration'">Duration<img
                         src="images/arrow-up.png"/></span>
-                <span class="ordered" ng:show="ord == 'duration'" ng:click="ord = '-duration'">Duration<img
+                <span class="ordered" ng:show="ui.storyOrder== 'duration'" ng:click="ui.storyOrder= '-duration'">Duration<img
                         src="images/arrow-down.png"/></span>
             </th>
         </tr>
         <tr>
-            <th ng:show="c.status" class="status filterLabel">Filter</th>
-            <th ng:show="c.path" class="path"><input name="search.path" class="filterInput"/></th>
-            <th ng:show="c.description" class="description"><input name="search.description" class="filterInput"/></th>
-            <th ng:show="c.meta" class="meta"><select name="search.meta" class="filterInput">
+            <th ng:show="ui.columns.status" class="status filterLabel">Filter</th>
+            <th ng:show="ui.columns.path" class="path"><input name="ui.search.path" class="filterInput"/></th>
+            <th ng:show="ui.columns.description" class="description"><input name="ui.search.description" class="filterInput"/></th>
+            <th ng:show="ui.columns.meta" class="meta"><select name="ui.search.meta" class="filterInput">
                 <option value="=" selected="selected">- All -</option>
                 <option ng:repeat="permutation in data.xref.meta">{{permutation}}</option>
             </select></th>
-            <th ng:show="c.narrative" class="narrative"><input name="search.narrative" class="filterInput"/></th>
-            <th ng:show="c.started" class="started"/>
-            <th ng:show="c.duration" class="duration total">{{data.xref.stories.$filter(search).$sum('duration') /1000 |
+            <th ng:show="ui.columns.narrative" class="narrative"><input name="ui.search.narrative" class="filterInput"/></th>
+            <th ng:show="ui.columns.started" class="started"/>
+            <th ng:show="ui.columns.duration" class="duration total">{{data.xref.stories.$filter(search).$sum('duration') /1000 |
                 number:0}} secs
             </th>
         </tr>
         </thead>
         <tbody>
-        <tr ng:repeat="story in data.xref.stories.$filter(search).$orderBy(ord)"
+        <tr ng:repeat="story in data.xref.stories.$filter(ui.search).$orderBy(ui.storyOrder)"
             ng:click="showResults(story)" title="Click to view the story details">
-            <td ng:show="c.status" class="status main">
+            <td ng:show="ui.columns.status" class="status main">
                 <img src="images/passed-true.png" alt="Story Passed" ng:show="story.passed"/>
                 <img src="images/passed-false.png" alt="Story Failed" ng:show="story.passed == false"/>
             </td>
-            <td ng:show="c.path" class="path main">{{story.path}}</td>
-            <td ng:show="c.description" class="description main">{{story.description}}</td>
-            <td ng:show="c.meta" class="meta main">{{story.meta}}</td>
-            <td ng:show="c.narrative" class="narrative main">{{story.narrative | newlines | html}}</td>
-            <td ng:show="c.started" class="started main">
+            <td ng:show="ui.columns.path" class="path main">{{story.path}}</td>
+            <td ng:show="ui.columns.description" class="description main">{{story.description}}</td>
+            <td ng:show="ui.columns.meta" class="meta main">{{story.meta}}</td>
+            <td ng:show="ui.columns.narrative" class="narrative main">{{story.narrative | newlines | html}}</td>
+            <td ng:show="ui.columns.started" class="started main">
                 <div>{{story.started | date:'MM-dd-yyyy'}}</div>
                 <div>{{story.started | date:'HH:mm:ss'}}</div>
             </td>
-            <td ng:show="c.duration" class="duration main">{{story.duration / 1000 | number:1}}</td>
+            <td ng:show="ui.columns.duration" class="duration main">{{story.duration / 1000 | number:1}}</td>
         </tr>
         </tbody>
     </table>
@@ -288,7 +294,7 @@ If you are learning Angular by reading this source file, take note of these:
 
 <!-- The Step-Match List Tab -->
 
-<div ng:show="tab == 2">
+<div ng:show="ui.tab == 2">
     <table cellspacing="0" cellpadding="0">
         <thead>
         <tr>
@@ -296,36 +302,36 @@ If you are learning Angular by reading this source file, take note of these:
         </tr>
         <tr class="columnTitles">
             <th class="type first">
-                <span ng:show="ord2 != '-type' &amp;&amp; ord2 != 'type' " ng:click="ord2 = 'type'">Type<img
+                <span ng:show="ui.stepsOrder != '-type' &amp;&amp; ui.stepsOrder != 'type' " ng:click="ui.stepsOrder = 'type'">Type<img
                         src="images/arrow-blank.png"/></span>
-                <span class="ordered" ng:show="ord2 == '-type'" ng:click="ord2 = 'type'">Type<img
+                <span class="ordered" ng:show="ui.stepsOrder == '-type'" ng:click="ui.stepsOrder = 'type'">Type<img
                         src="images/arrow-up.png"/></span>
-                <span class="ordered" ng:show="ord2 == 'type'" ng:click="ord2 = '-type'">Type<img
+                <span class="ordered" ng:show="ui.stepsOrder == 'type'" ng:click="ui.stepsOrder = '-type'">Type<img
                         src="images/arrow-down.png"/></span>
             </th>
             <th class="pattern">
-                <span ng:show="ord2 != '-annotatedPattern' &amp;&amp; ord2 != 'annotatedPattern' "
-                      ng:click="ord2 = 'annotatedPattern'">Pattern<img src="images/arrow-blank.png"/></span>
-                <span class="ordered" ng:show="ord2 == '-annotatedPattern'" ng:click="ord2 = 'annotatedPattern'">Pattern<img
+                <span ng:show="ui.stepsOrder != '-annotatedPattern' &amp;&amp; ui.stepsOrder != 'annotatedPattern' "
+                      ng:click="ui.stepsOrder = 'annotatedPattern'">Pattern<img src="images/arrow-blank.png"/></span>
+                <span class="ordered" ng:show="ui.stepsOrder == '-annotatedPattern'" ng:click="ui.stepsOrder = 'annotatedPattern'">Pattern<img
                         src="images/arrow-up.png"/></span>
-                <span class="ordered" ng:show="ord2 == 'annotatedPattern'" ng:click="ord2 = '-annotatedPattern'">Pattern<img
+                <span class="ordered" ng:show="ui.stepsOrder == 'annotatedPattern'" ng:click="ui.stepsOrder = '-annotatedPattern'">Pattern<img
                         src="images/arrow-down.png"/></span>
             </th>
             <th class="usages">
-                <span ng:show="ord2 != '-usages.$size()' &amp;&amp; ord2 != 'usages.$size()' "
-                      ng:click="ord2 = 'usages.$size()'">Count<img src="images/arrow-blank.png"/></span>
-                <span class="ordered" ng:show="ord2 == '-usages.$size()'" ng:click="ord2 = 'usages.$size()'">Count<img
+                <span ng:show="ui.stepsOrder != '-usages.$size()' &amp;&amp; ui.stepsOrder != 'usages.$size()' "
+                      ng:click="ui.stepsOrder = 'usages.$size()'">Count<img src="images/arrow-blank.png"/></span>
+                <span class="ordered" ng:show="ui.stepsOrder == '-usages.$size()'" ng:click="ui.stepsOrder = 'usages.$size()'">Count<img
                         src="images/arrow-up.png"/></span>
-                <span class="ordered" ng:show="ord2 == 'usages.$size()'" ng:click="ord2 = '-usages.$size()'">Count<img
+                <span class="ordered" ng:show="ui.stepsOrder == 'usages.$size()'" ng:click="ui.stepsOrder = '-usages.$size()'">Count<img
                         src="images/arrow-down.png"/></span>
             </th>
             <th class="usagesDetails last">
                 Usages
             </th>
         </tr>
-        <tr class="filters" ng:init="stepSearch.type = ''">
+        <tr class="filters" ng:init="ui.stepSearch.type = ''">
             <th>
-                <select name="stepSearch.type" class="filterInput">
+                <select name="ui.stepSearch.type" class="filterInput">
                     <option value="" selected>- All -</option>
                     <option>Given</option>
                     <option>When</option>
@@ -333,7 +339,7 @@ If you are learning Angular by reading this source file, take note of these:
                 </select>
             </th>
             <th>
-                <input name="stepSearch.annotatedPattern" class="filterInput"/>
+                <input name="ui.stepSearch.annotatedPattern" class="filterInput"/>
             </th>
             <th>
             </th>
@@ -349,7 +355,7 @@ If you are learning Angular by reading this source file, take note of these:
         </tr>
         </thead>
         <tbody>
-        <tr ng:repeat="match in data.xref.stepMatches.$filter(stepSearch).$orderBy(ord2)">
+        <tr ng:repeat="match in data.xref.stepMatches.$filter(ui.stepSearch).$orderBy(ui.stepsOrder)">
             <td class="type main">{{match.type}}</td>
             <td class="pattern main">{{match.annotatedPattern}}</td>
             <td class="size main">{{match.usages.$size()}}</td>
@@ -362,7 +368,6 @@ If you are learning Angular by reading this source file, take note of these:
                     </tr>
                 </table>
             </td>
-
         </tr>
         </tbody>
     </table>
@@ -370,25 +375,25 @@ If you are learning Angular by reading this source file, take note of these:
 </div>
 </div>
 <div id="footer">
-    <div class="left">Data Generated by {{data.xref.createdBy}} on {{ data.xref.whenMade | date:'MM/dd/yy HH:mm:ss'}} o {{overlayStyle}}
+    <div class="left">Data Generated by {{data.xref.createdBy}} on {{ data.xref.whenMade | date:'MM/dd/yy HH:mm:ss'}} {{ui.stepSearch}} {{ui.stepsOrder}}
     </div>
     <div class="clear"></div>
 </div>
 </div>
 </div>
 <!-- this copied from a JQuery-overlay UI control -->
-<div ng:show="showStory != null" role="dialog" tabindex="-1"
-     class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" ng:style="overlayStyle">
+<div ng:show="ui.showStory != null" role="dialog" tabindex="-1"
+     class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" ng:style="ui.overlayStyle">
     <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-        <span class="ui-dialog-title">Results For {{showStory.path}}</span>
-        <a role="button" class="ui-dialog-titlebar-close ui-corner-all" ng:click="overlayStyle = hideOverlayStyle; showStory = null">
+        <span class="ui-dialog-title">Results For {{ui.showStory.path}}</span>
+        <a role="button" class="ui-dialog-titlebar-close ui-corner-all" ng:click="ui.overlayStyle = constants.hideOverlayStyle; ui.showStory = null">
             <span class="ui-icon ui-icon-closethick">foo</span>
         </a>
     </div>
     <div scrollleft="0" scrolltop="0" class="ui-dialog-content ui-widget-content"
          style="margin: 0px; border: 0px none; padding: 0px; top: 0px; left: 0px; right: 0px; bottom: 0px; overflow: hidden; display: block; width: 1116px; min-height: 0px; height: 582px;">
         <iframe style="margin: 0px; border: 0px none; padding: 0px; top: 0px; left: 0px; right: 0px; bottom: 0px; width: 1116px; height: 582px;"
-                ng:src="{{showStory.html}}" background="transparent" frameborder="0" scrolling="auto"></iframe>
+                ng:src="{{ui.showStory.html}}" background="transparent" frameborder="0" scrolling="auto"></iframe>
         <div style="position: absolute; margin: 0px; border: 0px none; padding: 0px; top: 0px; left: 0px; right: 0px; bottom: 0px; width: 100%; height: 100%; display: none;">
              
         </div>
@@ -410,7 +415,7 @@ If you are learning Angular by reading this source file, take note of these:
         </div>
     </div>
 </div>
-<div ng:show="showStory != null" style="width: 1425px; height: 784px; z-index: 1001;" class="ui-widget-overlay"></div>
+<div ng:show="ui.showStory != null" style="width: 1425px; height: 784px; z-index: 1001;" class="ui-widget-overlay"></div>
 
 </body>
 
