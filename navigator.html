@@ -3,7 +3,7 @@
 
 <!-- 
 
-JBehave Story Navigator using Angular.js.
+JBehave Story Navigator using Angular.js
 
 If learning Angular by reading this source file, take note of these:
 
@@ -100,7 +100,6 @@ If learning Angular by reading this source file, take note of these:
 
         this.showResults = function (story) {
             self.showStory = story;
-            alert("s");
             self.overlayStyle = self.showOverlayStyle;
         };
     }
@@ -371,12 +370,11 @@ If learning Angular by reading this source file, take note of these:
 </div>
 </div>
 <!-- this copied from a JQuery-overlay UI control -->
-<div role="dialog" tabindex="-1"
-     class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable"
-     ng:style="overlayStyle">
+<div ng:show="showStory != null" role="dialog" tabindex="-1"
+     class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" ng:style="overlayStyle">
     <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
         <span class="ui-dialog-title">Results For {{showStory.path}}</span>
-        <a role="button" class="ui-dialog-titlebar-close ui-corner-all" ng:click="overlayStyle = hideOverlayStyle">
+        <a role="button" class="ui-dialog-titlebar-close ui-corner-all" ng:click="overlayStyle = hideOverlayStyle; showStory = null">
             <span class="ui-icon ui-icon-closethick">foo</span>
         </a>
     </div>
